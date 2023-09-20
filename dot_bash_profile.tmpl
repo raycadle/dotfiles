@@ -9,7 +9,7 @@ umask 027
 export HISTFILESIZE=0
 export HISTCONTROL=ignoreboth:erasedups
 
-{{ if eq .hosttype "dev" -}}
+{{ if eq .hosttype "desktop" -}}
 # Set PATH variable
 export PATH="${PATH}:${HOME}/.local/bin"
 
@@ -28,19 +28,19 @@ export XDG_CONFIG_DIRS="${XDG_CONFIG_HOME}:/etc/xdg"
 [[ -z "$SSH_AUTH_SOCK" ]] && eval $(ssh-agent -s) &> /dev/null
 
 # Autostart X11 on tty1
-if shopt -q login_shell; then
-    if [[ -t 0 && "$(tty)" == "/dev/tty1" && ! $DISPLAY ]]; then
-        if startx &> /dev/null; then
-            exit
-        else
-            echo "The X session aborted! Dropped to text shell." >&2
-        fi
-    fi
-else
-    exit 1 # Somehow this is a non-bash or non-login shell
-fi
+#if shopt -q login_shell; then
+#    if [[ -t 0 && "$(tty)" == "/dev/tty1" && ! $DISPLAY ]]; then
+#        if startx &> /dev/null; then
+#            exit
+#        else
+#            echo "The X session aborted! Dropped to text shell." >&2
+#        fi
+#    fi
+#else
+#    exit 1 # Somehow this is a non-bash or non-login shell
+#fi
 
-{{- else if eq .hosttype "srv" -}}
+{{- else if eq .hosttype "server" -}}
 # Set EDITOR variable
 export EDITOR="${EDITOR:-vi}"
 {{- end }}

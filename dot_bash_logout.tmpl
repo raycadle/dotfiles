@@ -2,7 +2,7 @@
 # ~/.bash_logout
 #
 
-{{ if eq .hosttype "dev" -}}
+{{ if eq .hosttype "desktop" -}}
 if [[ -n "${SSH_AUTH_SOCK}" ]]; then
     killall ssh-agent
 fi
