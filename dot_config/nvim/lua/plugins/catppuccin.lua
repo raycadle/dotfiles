@@ -27,6 +27,10 @@ return {
           },
         },
         integrations = {
+          alpha = true,
+          leap = true,
+          telescope = true,
+          which_key = true,
           -- visit github.com/catppuccin/nvim#integrations
         },
       })

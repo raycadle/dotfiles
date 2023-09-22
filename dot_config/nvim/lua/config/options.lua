@@ -2,11 +2,15 @@
 -- Neovim Optionw
 --]]
 
+local vg = vim.g -- Global Options
 local vo = vim.opt -- Set Options
 
 --------------------
 -- General
 --------------------
+vg.mapleader = " "
+vg.maplocalleader = "\\"
+
 --vo.clipboard = "unnamedplus" -- Sync clipboard between OS and Neovim.
 vo.mouse = "a" -- Enable mouse mode
 vo.ignorecase = true -- Case insensitive searching 
