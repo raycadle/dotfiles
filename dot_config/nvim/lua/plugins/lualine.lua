@@ -1,30 +1,23 @@
 return {
-  { -- Set lualine as statusline
-    "nvim-lualine/lualine.nvim",
-    opts = {
-      options = {
-        icons_enabled = true,
-        theme = "catppuccin",
-        component_separators = "|",
-        section_separators = "",
-      },
-      sections = {
-        lualine_a = {"mode"},
-        lualine_b = {
-          {
-            "filename",
-            file_status = true,
-          }
-        },
-        lualine_c = {},
-        lualine_x = {},
-        lualine_y = {},
-        lualine_z = {
-          {
-            "location",
-            --enable_last = true,
-          }
-        },
+  "nvim-lualine/lualine.nvim",
+  opts = {
+    options = {
+      icons_enabled = false,
+      theme = "catppuccin",
+      disabled_filetypes = { statusline = { "alpha" } },
+      component_separators = "|",
+      section_separators = "",
+    },
+    sections = {
+      lualine_a = {"mode"},
+      lualine_b = {"branch"},
+      lualine_c = {"filename"},
+      lualine_x = {"diff"},
+      lualine_y = {"location"},
+      lualine_z = {
+        function()
+          return os.date("%R")
+        end,
       },
     },
   },
