@@ -1,2 +1,5 @@
 README.md
 LICENSE
+{{ if ne .hosttype "server" -}}
+.config/git
+{{- end }}
