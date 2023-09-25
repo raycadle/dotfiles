@@ -7,9 +7,9 @@ shopt -s checkwinsize
 
 #################
 # General Aliases
+#################
 
 # Navigational
-
 alias ..='cd ..'
 alias ...='cd ..; cd ..'
 alias ....='cd ..; cd ..; cd ..'
@@ -22,16 +22,15 @@ alias lll='ls -Alh --color=auto'
 alias q='exit'
 
 # Frequently Used
-
 alias c='clear'
 alias e='"$EDITOR"'
 
 ####################
 # Host-specific Info
-
+####################
 {{ if eq .hosttype "desktop" -}}
-# Git-specific Aliases
 
+# Git-specific Aliases
 alias gs='git status'
 alias ga='git add'
 alias gc='git commit'
@@ -40,6 +39,9 @@ alias gb='git branch'
 alias gch='git checkout'
 alias gpl='git pull'
 alias gps='git push'
+
+# Special Aliases
+alias gsconnect="${XDG_DATA_HOME}/gnome-shell/extensions/gsconnect@andyholmes.github.io/service/daemon.js"
 
 # Command Prompt
 export GIT_PS1_SHOWCOLORHINTS=1
