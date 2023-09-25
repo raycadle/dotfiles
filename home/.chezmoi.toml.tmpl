@@ -1,4 +1,4 @@
-{{- choices := [2]string{"desktop", "server"} -}}
+{{- $choices := "desktop", "server" -}}
 {{- $hosttype := promptChoiceOnce . "hosttype" "Are you on a desktop or server" $choices -}}
 
 [data]
