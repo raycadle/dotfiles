@@ -1,4 +1,4 @@
-{{- $hosttype := promptStringOnce . "hosttype" "Are you on a desktop or server" -}}
+{{- $hosttype := promptChoiceOnce . "hosttype" "Are you on a desktop or server" "desktop" "server" -}}
 
 [data]
-    hosttype: {{ $hosttype | quote }}
+    hosttype = {{ $hosttype | quote }}
