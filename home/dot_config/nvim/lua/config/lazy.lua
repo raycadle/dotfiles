@@ -18,6 +18,15 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+
+--------------------
+-- Plugin specs
+--------------------
+local specs = {
+  {import = "plugins.ui"},
+  {import = "plugins.ux"},
+}
+
 --------------------
 -- Lazy.nvim options
 --------------------
@@ -60,4 +69,4 @@ local opts = {
 --------------------
 -- Load Lazy.nvim
 --------------------
-require("lazy").setup("plugins", opts)
+require("lazy").setup(specs, opts)

@@ -1,4 +1,5 @@
 return {
+  -- This module holds the statusline configuration
   "nvim-lualine/lualine.nvim",
   opts = {
     options = {
