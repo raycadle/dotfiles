@@ -16,24 +16,24 @@ gui:
       - '#29ab87'
       - bold
     inactiveBorderColor:
-      - white
+      - '#155644'
     searchingActiveBorderColor:
-      - cyan
+      - '#29ab87'
       - bold
     optionsTextColor:
-      - blue
+      - white
     selectedLineBgColor:
-      - blue # set to `default` to have no background colour
+      - '#29ab87' # set to `default` to have no background colour
     selectedRangeBgColor:
-      - blue
-    cherryPickedCommitBgColor:
-      - cyan
-    cherryPickedCommitFgColor:
-      - blue
-    unstagedChangesColor:
-      - red
-    defaultFgColor:
       - default
+    cherryPickedCommitBgColor:
+      - default
+    cherryPickedCommitFgColor:
+      - default
+    unstagedChangesColor:
+      - default
+    defaultFgColor:
+      - white
   commitLength:
     show: true
   mouseEvents: true
@@ -47,7 +47,7 @@ gui:
   showPanelJumps: true # for showing the jump-to-panel keybindings as panel subtitles
   showCommandLog: true
   showIcons: false # deprecated: use nerdFontsVersion instead
-  nerdFontsVersion: "" # nerd fonts version to use ("2" or "3"); empty means don't show nerd font icons
+  nerdFontsVersion: "3" # nerd fonts version to use ("2" or "3"); empty means don't show nerd font icons
   commandLogSize: 8
   splitDiff: 'auto' # one of 'auto' | 'always'
   skipRewordInEditorWarning: false # for skipping the confirmation before launching the reword editor
