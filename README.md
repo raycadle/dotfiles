@@ -1,6 +1,18 @@
 # Dotfiles
 A very minimal collection of dotfiles managed by chezmoi.
 
+## Dependencies
+- neovim
+- tmux
+- git
+- tmux
+- fd
+- ripgrep
+- fzf
+- ranger
+- lazygit
+- nerdfonts
+
 ## Usage
 After a fresh Linux install, run:
 ```shell
