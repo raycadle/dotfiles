@@ -1,15 +1,12 @@
 --[[
--- Neovim Optionw
+-- Neovim Options
 --]]
-
-local vg = vim.g -- Global Options
-local vo = vim.opt -- Set Options
 
 --------------------
 -- General
 --------------------
-vg.mapleader = " "
-vg.maplocalleader = "\\"
+local vg = vim.g -- Global Options
+local vo = vim.opt -- Set Options
 
 vg.loaded_python3_provider = 0
 vg.loaded_ruby_provider = 0
@@ -35,7 +32,7 @@ vo.termguicolors = true -- Enable terminal colors
 -- Neovim UI
 --------------------
 vo.cmdheight = 0 -- Merge statusline and command line
-vo.laststatus = 2 -- Set statusline to always display
+vo.laststatus = 3 -- Set statusline to always display
 vo.cursorline = true -- Highlight current line in Insert mode
 vo.hlsearch = false -- Highlight on search
 vo.number = true -- Line numbers

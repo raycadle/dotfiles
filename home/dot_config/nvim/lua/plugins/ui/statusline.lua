@@ -11,15 +11,11 @@ return {
     },
     sections = {
       lualine_a = {"mode"},
-      lualine_b = {"branch", "diff"},
+      lualine_b = {},
       lualine_c = {"filename"},
-      lualine_x = {},
-      lualine_y = {"location"},
-      lualine_z = {
-        function()
-          return os.date("%R")
-        end,
-      },
+      lualine_x = {"diff"},
+      lualine_y = {"branch"},
+      lualine_z = {"location"},
     },
   },
 }

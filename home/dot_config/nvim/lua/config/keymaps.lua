@@ -4,6 +4,10 @@ Keymaps
 
 --]]
 
+local vg = vim.g -- Global Options
+vg.mapleader = " "
+vg.maplocalleader = "\\"
+
 local function map(mode, lhs, rhs, opts)
     vim.keymap.set(mode, lhs, rhs, opts)
 end
@@ -34,21 +38,28 @@ map("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Location List" })
 map("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Quickfix List" })
 
 -- Terminal Mappings
-map("n", "<c-/>", "<cmd>terminal<cr>", { desc = "Terminal" })
+map("n", "<C-/>", "<cmd>terminal<cr>", { desc = "Show Terminal" })
+map("t", "<C-/>", "<cmd>close<cr>", { desc = "Hide Terminal" })
 map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
 map("t", "<C-h>", "<cmd>wincmd h<cr>", { desc = "Go to left window" })
 map("t", "<C-j>", "<cmd>wincmd j<cr>", { desc = "Go to lower window" })
 map("t", "<C-k>", "<cmd>wincmd k<cr>", { desc = "Go to upper window" })
 map("t", "<C-l>", "<cmd>wincmd l<cr>", { desc = "Go to right window" })
-map("t", "<C-/>", "<cmd>close<cr>", { desc = "Hide Terminal" })
+
+-- Floaterm Mappings
+map("n", "<leader>tt", "<cmd>FloatermNew --wintype=popup --height=0.75 --width=0.75<cr>", { desc = "Show Terminal" })
+map("n", "<leader>tg", "<cmd>FloatermNew --wintype=popup --height=0.75 --width=0.75 lazygit<cr>", { desc = "Show Lazygit" })
+map("n", "<leader>tr", "<cmd>FloatermNew --wintype=popup --height=0.75 --width=0.75 ranger<cr>", { desc = "Show Ranger" })
+map("n", "<leader>ty", "<cmd>FloatermNew --wintype=popup --height=0.75 --width=0.75 ytop<cr>", { desc = "Show Ytop" })
+map("n", "<leader>t.", "<cmd>FloatermToggle<cr>", { desc = "Toggle Terminal" })
 
 -- windows
 map("n", "<leader>ww", "<C-W>p", { desc = "Other window", remap = true })
 map("n", "<leader>wd", "<C-W>c", { desc = "Delete window", remap = true })
 map("n", "<leader>w-", "<C-W>s", { desc = "Split window below", remap = true })
 map("n", "<leader>w|", "<C-W>v", { desc = "Split window right", remap = true })
-map("n", "<leader>-", "<C-W>s", { desc = "Split window below", remap = true })
-map("n", "<leader>|", "<C-W>v", { desc = "Split window right", remap = true })
+--map("n", "<leader>-", "<C-W>s", { desc = "Split window below", remap = true })
+--map("n", "<leader>|", "<C-W>v", { desc = "Split window right", remap = true })
 
 -- Move to window using the <ctrl> hjkl keys
 map("n", "<C-h>", "<C-w>h", { desc = "Go to left window", remap = true })
