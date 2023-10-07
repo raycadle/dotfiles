@@ -1,5 +1,5 @@
 README.md
 LICENSE
-{{- if ne .hosttype "desktop" }}
-.config/git
+{{- if ne .hosttype "termux" }}
+.termux/termux.properties
 {{- end }}
