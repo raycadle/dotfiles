@@ -23,15 +23,13 @@ export XDG_DATA_HOME="${HOME}/.local/share"
 export XDG_CONFIG_DIRS="${XDG_CONFIG_HOME}:/etc/xdg"
 export XDG_DATA_DIRS="${XDG_DATA_HOME}:/usr/local/share:/usr/share"
 
-{{- if eq .hosttype "termux" }}
-
+{{ if eq .hosttype "termux" -}}
 # Start ssh-agent
 if [[ -z "${SSH_AUTH_SOCK}" ]]; then
   eval $(ssh-agent -s) &> /dev/null
   ssh-add ~/.ssh/*_rsa ~/.ssh/*_ed25519 &> /dev/null
 fi
-
-{{ end -}}
+{{- end }}
 
 # Source ~/.bashrc if found
 [[ -f ~/.bashrc ]] && source ~/.bashrc
