@@ -23,9 +23,7 @@ vim.opt.rtp:prepend(lazypath)
 -- Plugin specs
 --------------------
 local specs = {
-  {import = "plugins.ui"},
-  {import = "plugins.ux"},
-  {import = "plugins.util"},
+  {import = "plugins"},
 }
 
 --------------------
