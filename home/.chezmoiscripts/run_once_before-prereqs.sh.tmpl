@@ -15,7 +15,7 @@ prereqs=(
   "tmux"
 )
 
-{{ if -eq .hosttype "termux" }}
+{{ if eq .hosttype "termux" }}
 # Install prereqs
 apt update && apt install -y "${prereqs[@]}"
 
