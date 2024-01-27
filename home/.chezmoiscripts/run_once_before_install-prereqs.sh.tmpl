@@ -22,7 +22,7 @@ apt update && apt install -y "${prereqs[@]}"
 # Install nerdfont
 curl -fL --output-dir "~/.termux" \
   -o "font.ttf" \
-  https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/SourceCodePro/Regular/SauceCodeProNerdFontMono-Regular.ttf
+  https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/SourceCodePro/SauceCodeProNerdFontMono-Regular.ttf
 {{ else }}
 # Install prereqs
 pacman -Sy --noconfirm "${prereqs[@]}"
@@ -31,7 +31,7 @@ pacman -Sy --noconfirm "${prereqs[@]}"
 mkdir -p ~/.local/share/fonts/SauceCodePro
 curl -fL --output-dir "~/.local/share/fonts/SauceCodePro" \
   -o "SauceCodeProNerdFontMono-Regular.ttf" \
-  https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/SourceCodePro/Regular/SauceCodeProNerdFontMono-Regular.ttf \
+  https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/SourceCodePro/SauceCodeProNerdFontMono-Regular.ttf \
   -o "SauceCodeProNerdFont-Regular.ttf" \
-  https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/SourceCodePro/Regular/SauceCodeProNerdFont-Regular.ttf
+  https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/SourceCodePro/SauceCodeProNerdFont-Regular.ttf
 {{ end -}}
