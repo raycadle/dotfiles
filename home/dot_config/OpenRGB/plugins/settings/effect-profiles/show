@@ -1,0 +1,62 @@
+{
+    "Effects": [
+        {
+            "AllowOnlyFirst": false,
+            "AutoStart": true,
+            "Brightness": 50,
+            "ControllerZones": [
+                {
+                    "description": "Logitech Keyboard Device",
+                    "is_segment": false,
+                    "location": "",
+                    "name": "Logitech G610 Orion",
+                    "reverse": false,
+                    "segment_idx": -1,
+                    "self_brightness": 100,
+                    "serial": "137C37543235",
+                    "vendor": "Logitech",
+                    "version": "",
+                    "zone_idx": 0
+                },
+                {
+                    "description": "Logitech Wireless Lightspeed Device",
+                    "is_segment": false,
+                    "location": "HID: /dev/hidraw3 (Receiver) \r\nWireless Index: 255",
+                    "name": "G502 HERO Gaming Mouse",
+                    "reverse": false,
+                    "segment_idx": -1,
+                    "self_brightness": 100,
+                    "serial": "",
+                    "vendor": "Logitech",
+                    "version": "",
+                    "zone_idx": 0
+                },
+                {
+                    "description": "Logitech Wireless Lightspeed Device",
+                    "is_segment": false,
+                    "location": "HID: /dev/hidraw3 (Receiver) \r\nWireless Index: 255",
+                    "name": "G502 HERO Gaming Mouse",
+                    "reverse": false,
+                    "segment_idx": -1,
+                    "self_brightness": 100,
+                    "serial": "",
+                    "vendor": "Logitech",
+                    "version": "",
+                    "zone_idx": 1
+                }
+            ],
+            "CustomName": "",
+            "CustomSettings": {
+                "saturation": 237
+            },
+            "EffectClassName": "Bloom",
+            "FPS": 60,
+            "RandomColors": false,
+            "Slider2Val": 1,
+            "Speed": 100,
+            "Temperature": 0,
+            "Tint": 0
+        }
+    ],
+    "version": 2
+}

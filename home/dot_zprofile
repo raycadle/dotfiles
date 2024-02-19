@@ -1,0 +1,26 @@
+# Configure history
+export HISTFILESIZE=1000000000
+export HISTSIZE=1000000000
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_FIND_NO_DUPS
+
+# Set PATH variable
+export PATH="${PATH}:${HOME}/.local/bin"
+
+# Set EDITOR variable
+export EDITOR="${EDITOR:-nvim}"
+
+# Set XDG_BASE_DIRS variables
+export XDG_CONFIG_HOME="${HOME}/.config"
+export XDG_CACHE_HOME="${HOME}/.cache"
+export XDG_STATE_HOME="${HOME}/.local/state"
+export XDG_DATA_HOME="${HOME}/.local/share"
+export XDG_CONFIG_DIRS="${XDG_CONFIG_HOME}:/etc/xdg"
+export XDG_DATA_DIRS="${XDG_DATA_HOME}:/usr/local/share:/usr/share"
+
+if [[ -z "${SSH_AUTH_SOCK}" ]]; then
+  eval "$(ssh-agent -s)" &> /dev/null
+fi
+ssh-add ~/.ssh/*_rsa ~/.ssh/*_ed25519 &> /dev/null
+
+[[ "$(tty)" == /dev/tty/* && -f ~/.zshrc ]] && source ~/.zshrc

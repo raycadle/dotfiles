@@ -1,0 +1,10 @@
+    "custom/wbar": {
+        "format": "󱔓", //    //
+        "exec": "echo ; echo  switch menubar //  dock",
+        "on-click": "~/.config/hypr/scripts/wbarconfgen.sh n",
+        "on-click-right": "~/.config/hypr/scripts/wbarconfgen.sh p",
+        "on-click-middle": "sleep 0.1 && ~/.config/hypr/scripts/quickapps.sh kitty brave spotify codium dolphin",
+        "interval" : 86400,
+        "tooltip": true
+    },
+

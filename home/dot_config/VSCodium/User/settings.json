@@ -1,0 +1,28 @@
+{
+    "explorer.confirmDelete": false,
+    "git.autofetch": true,
+    "files.autoSave": "onFocusChange",
+    "catppuccin.accentColor": "rosewater",
+    "github.gitProtocol": "ssh",
+    "workbench.colorTheme": "Catppuccin Mocha",
+    // make Mocha specifically very dark
+    // (this preserves other flavors!)
+    "catppuccin.colorOverrides": {
+        "mocha": {
+            //"base": "#000000",
+            //"mantle": "#010101",
+            //"crust": "#020202"
+        }
+    },
+    // use your accent (pink) on the statusBar as well
+    "catppuccin.customUIColors": {
+        "mocha": {
+            "statusBar.foreground": "accent"
+        }
+    },
+    "editor.fontFamily": "'SauceCodePro Nerd Font Mono', 'Droid Sans Mono', 'monospace', monospace",
+    "window.menuBarVisibility": "toggle",
+    "workbench.startupEditor": "none",
+    "git.confirmSync": false,
+    "terminal.integrated.defaultProfile.linux": "zsh"
+}
