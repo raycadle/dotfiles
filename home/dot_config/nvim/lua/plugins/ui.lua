@@ -11,18 +11,18 @@ return {
           light = "latte",
           dark = "mocha",
         },
-        transparent_background = false,
+        transparent_background = true,
         show_end_of_buffer = false,
         term_colors = true,
         styles = {
           comments = {},
           conditionals = {},
         },
-        color_overrides = {
-          mocha = {
-            base = "#000000",
-          },
-        },
+        --color_overrides = {
+        --  mocha = {
+        --    base = "#000000",
+        --  },
+        --},
         integrations = {
           alpha = true,
           leap = true,
@@ -38,11 +38,12 @@ return {
   {
     -- This module holds the statusline configuration
     "nvim-lualine/lualine.nvim",
+    event = "VeryLazy",
     opts = {
       options = {
         icons_enabled = false,
         theme = "catppuccin",
-        disabled_filetypes = { statusline = { "alpha" } },
+        disabled_filetypes = { statusline = { "alpha", "lazy" } },
         component_separators = "|",
         section_separators = "",
       },
