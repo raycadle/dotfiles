@@ -1,0 +1,33 @@
+#!{{ lookPath "bash" }}
+
+set -eu
+
+# Prereq packages
+prereqs=(
+  "bash"
+  "curl"
+  "git"
+  "lazygit"
+  "neovim"
+  "ripgrep"
+  "fzf"
+  "fd"
+  "tmux"
+)
+
+{{ if eq .hosttype "termux" }}
+# Install prereqs
+apt update && apt install -y "${prereqs[@]}"
+
+# Install nerdfont
+curl -fLO https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/SourceCodePro/SauceCodeProNerdFontMono-Regular.ttf
+mv ~/SauceCodeProNerdFontMono-Regular.ttf ~/.termux/font.ttf
+{{ else }}
+# Install prereqs
+pacman -Sy --noconfirm "${prereqs[@]}"
+
+# Install nerdfont
+mkdir -p ~/.local/share/fonts/SauceCodePro
+curl -fLO https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/SourceCodePro/SauceCodeProNerdFontMono-Regular.ttf -O https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/SourceCodePro/SauceCodeProNerdFont-Regular.ttf
+mv ~/SauceCode*.ttf ~/.local/share/fonts/SauceCodePro/
+{{ end -}}
