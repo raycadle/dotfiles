@@ -19,11 +19,6 @@ map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
 -- new file
 map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
 
--- clipboard controls
-map({ "v" }, "<C-c>", "\"*y", { desc = "Copy text to system clipboard" })
-map({ "v" }, "<C-x>", "\"*d", { desc = "Cut text to system clipboard" })
-map({ "i" }, "<C-v>", "<esc>\"*pa", { desc = "Paste text from system clipboard" })
-
 -- Clear search with <esc>
 map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
 
