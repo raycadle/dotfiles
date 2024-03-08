@@ -24,7 +24,11 @@ curl -fLO https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Sourc
 mv ~/SauceCodeProNerdFontMono-Regular.ttf ~/.termux/font.ttf
 {{ else }}
 # Install prereqs
-pacman -Sy --noconfirm "${prereqs[@]}"
+if which yay; then
+  yay -Sy --noconfirm "${prereqs[@]}"
+else
+  sudo pacman -Sy --noconfirm "${prereqs[@]}"
+fi
 
 # Install nerdfont
 mkdir -p ~/.local/share/fonts/SauceCodePro
