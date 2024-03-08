@@ -3,7 +3,7 @@
 #
 
 # Set umask
-umask 027
+umask 077
 
 # Configure history
 setopt HIST_IGNORE_ALL_DUPS

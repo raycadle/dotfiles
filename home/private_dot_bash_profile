@@ -3,7 +3,7 @@
 #
 
 # Set umask
-umask 027
+umask 077
 
 if [[ -z "${SSH_AUTH_SOCK}" ]]; then
   eval "$(ssh-agent -s)" &> /dev/null
