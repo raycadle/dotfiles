@@ -44,46 +44,9 @@ function in {
     fi
 }
 
-# Helpful aliases
-alias l='eza --icons=auto --group-directories-first' # short list
-alias ld='eza -D --icons=auto' # short list dirs
-alias lf='eza -f --icons=auto' # short list files
-alias la='eza -a --icons=auto --group-directories-first' # short list all
-alias ll='eza -1 --icons=auto --group-directories-first' # long list
-alias lld='eza -1D --icons=auto' # long list dirs
-alias llf='eza -1f --icons=auto' # long list files
-alias lla='eza -1a --icons=auto --group-directories-first' # long list all
-alias lll='eza -lh --icons=auto --group-directories-first' # long list info
-alias llld='eza -lhD --icons=auto' # long list info dirs
-alias lllf='eza -lhf --icons=auto' # long list info file
-alias llla='eza -lha --icons=auto --group-directories-first' # long list info all
-alias un='$aurhelper -Rns' # uninstall package
-alias up='$aurhelper -Syu' # update system/package/aur
-alias pl='$aurhelper -Qs' # list installed package
-alias pa='$aurhelper -Ss' # list availabe package
-alias pc='$aurhelper -Sc' # remove unused cache
-alias po='$aurhelper -Qtdq | $aurhelper -Rns -' # remove unused packages, also try > $aurhelper -Qqd | $aurhelper -Rsu --print -
+# Aliases
 
-# Handy change dir shortcuts
-alias g='cd'
-alias r='cd "$OLDPWD"'
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias .....='cd ../../../..'
-alias ......='cd ../../../../..'
-
-# Frequently used apps
-alias lg='lazygit --use-config-file="${XDG_CONFIG_HOME}/lazygit/config.yml,${XDG_CONFIG_HOME}/lazygit/theme.yml"' # git terminal interface
-alias vc='codium --disable-gpu' # gui code editor
-
-# Frequently used commands
-alias q='exit'
-alias c='clear'
-alias e='"$EDITOR"'
-
-# Always mkdir a path (this doesn't inhibit functionality to make a single dir)
-alias mkdir='mkdir -p'
+if [[ -f ~/.aliasrc ]]; then source ~/.aliasrc; fi
 
 # Fixes "Error opening terminal: xterm-kitty" when using the default kitty term to open some programs through ssh
 alias ssh='kitten ssh'
