@@ -39,5 +39,7 @@ alias q='exit'
 alias c='clear'
 alias e='"$EDITOR"'
 
+# Modify existing commands
 # Always mkdir a path (this doesn't inhibit functionality to make a single dir)
 alias mkdir='mkdir -p'
+alias rm='rm -Ir'
