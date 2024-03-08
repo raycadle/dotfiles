@@ -1,0 +1,11 @@
+#!/usr/bin/bash
+
+set -eu
+
+if [[ "${1}" == "on" ]]; then
+  openrgb -p light &> /dev/null
+elif [[ "${1}" == "off" ]]; then
+  openrgb -p dark &> /dev/null
+elif [[ "${1}" == "show" ]]; then
+  openrgb -p show &> /dev/null
+fi

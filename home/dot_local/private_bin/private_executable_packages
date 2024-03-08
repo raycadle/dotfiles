@@ -1,0 +1,35 @@
+#!/usr/bin/bash
+
+set -eu
+
+if which yay; then
+    pkgman="yay"
+else
+    pkgman="sudo pacman"
+fi
+
+"${pkgman}" -Sy &> /dev/null
+UPDATES="$("${pkgman}" -Qu | wc -l)"
+
+if [[ "${1}" == "check" ]]; then
+  if [[ "${UPDATES}" -gt 0 ]]; then
+    if [[ "${UPDATES}" -eq 1 ]]; then
+      send-notif "Status: ${UPDATES} Update!"
+    else
+      send-notif "Status: ${UPDATES} Updates!"
+    fi
+  else
+    send-notif "Status: No Updates."
+  fi
+elif [[ "${1}" == "upgrade" ]]; then
+  if [[ "${UPDATES}" -gt 0 ]]; then
+    send-notif "Status: Upgrading..."
+    if "${pkgman}" -Syu --noconfirm; then
+      send-notif "Result: Success!"
+    else
+      send-notif "Result: Failure!"
+    fi
+  else
+    send-notif "Status: No Updates."
+  fi
+fi
