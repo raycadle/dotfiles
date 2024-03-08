@@ -1,7 +1,7 @@
     "pulseaudio": {
         "format": "{icon}",
         "format-muted": "󰖁",
-        "format-alt": "{icon} {volume}%",
+        "format-alt": "{volume}% {icon}",
         "on-click-middle": "~/.config/hypr/scripts/volumecontrol.sh -o m",
         "on-click-right": "pavucontrol -t 3",
         "on-scroll-up": "~/.config/hypr/scripts/volumecontrol.sh -o i",
@@ -21,7 +21,7 @@
 
     "pulseaudio#microphone": {
         "format": "{format_source}",
-        "format-alt": "{format_source} {source_volume}%",
+        "format-alt": "{source_volume}% {format_source}",
         "format-source": "󰍬",
         "format-source-muted": "󰍭",
         "on-click-middle": "~/.config/hypr/scripts/volumecontrol.sh -i m",

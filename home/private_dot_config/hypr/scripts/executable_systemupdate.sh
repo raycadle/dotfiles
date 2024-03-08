@@ -9,10 +9,11 @@ fi
 ScrDir=`dirname "$(realpath "$0")"`
 source $ScrDir/globalcontrol.sh
 
+upd=0
 # Check for updates
 get_aurhlpr
 aur=`${aurhlpr} -Qua | wc -l`
-ofc=`checkupdates | wc -l`
+ofc=`${aurhlpr} -Qu --repo | wc -l`
 
 # Check for flatpak updates
 if pkg_installed flatpak ; then
@@ -25,7 +26,7 @@ else
 fi
 
 # Calculate total available updates
-upd=$(( ofc + aur + fpk ))
+export upd=$(( ofc + aur + fpk ))
 
 # Show tooltip
 if [ $upd -eq 0 ] ; then
@@ -35,7 +36,6 @@ else
 fi
 
 # Trigger upgrade
-if [ "$1" == "up" ] ; then
+if [ "$1" == "u" ] ; then
     kitty --title systemupdate sh -c "${aurhlpr} -Syu $fpk_exup"
 fi
-

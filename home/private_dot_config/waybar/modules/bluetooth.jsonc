@@ -1,9 +1,9 @@
     "bluetooth": {
         "format-on": "󰂯",
-        "format-alt": "󰂯 {status}",
+        "format-alt": "{status} 󰂯",
         "format-off": "󰂲",
-        "format-connected": "󰂱 {num_connections}",
-        "format-connected-battery": "{icon} {num_connections}",
+        "format-connected": "{num_connections} 󰂱",
+        "format-connected-battery": "{num_connections} {icon}",
         // "format-connected-battery": "{icon} {device_alias}-{device_battery_percentage}%",
         "format-icons": ["󰥇", "󰤾", "󰤿", "󰥀", "󰥁", "󰥂", "󰥃", "󰥄", "󰥅", "󰥆", "󰥈"],
         // "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device If this config option is not defined or none of the devices in the list are connected, it will fall back to showing the last connected device.

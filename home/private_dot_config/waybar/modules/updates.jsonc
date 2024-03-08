@@ -2,9 +2,9 @@
         "exec": "~/.config/hypr/scripts/systemupdate.sh",
         "return-type": "json",
         "format": "󰚰",
-        "format-alt": "󰚰 {}",
-        "on-click-right": "~/.config/hypr/scripts/systemupdate.sh up",
-        "interval": 86400, // once every day
+        "format-alt": "{} 󰚰",
+        "on-click-right": "~/.config/hypr/scripts/systemupdate.sh u",
+        "interval": 3600, // once every day
         "tooltip": true
     },
 

@@ -2,6 +2,7 @@
       "tooltip": true,
       "tooltip-format": "{} notifications",
       "format": "{icon}",
+      "format-alt": "{} {icon}",
       "format-icons": {
         "notification": "󰂚",
         "none": "󰂜",
@@ -15,7 +16,7 @@
       "return-type": "json",
       "exec-if": "which swaync-client",
       "exec": "swaync-client -swb",
-      "on-click": "swaync-client -t -sw",
       "on-click-middle": "swaync-client -d -sw",
+      "on-click-right": "swaync-client -t -sw",
       "escape": true
     },
