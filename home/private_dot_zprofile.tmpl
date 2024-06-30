@@ -1,4 +1,15 @@
 # shellcheck disable=all
+###################
+# Helper Functions
+###################
+#
+# Config Directory
+config_dir="${HOME}/.config/zsh"
+
+# Source single file if exists
+source_file() { if [[ -f "${1}" ]]; then source "${1}"; fi }
+
+###################
 #
 #    ███████╗██████╗ ██████╗  ██████╗ ███████╗██╗██╗     ███████╗
 #    ╚══███╔╝██╔══██╗██╔══██╗██╔═══██╗██╔════╝██║██║     ██╔════╝
@@ -10,13 +21,10 @@
 # Set umask
 umask 077
 
-# Source file if exists
-source_file() { if [[ -f "${1}" ]]; then source "${1}"; fi }
+# Source envrc
+source_file "${config_dir}/envrc"
 
-# Source ~/.config/sh/envrc if found
-source_file "${HOME}/.config/sh/envrc"
-
-# Source ~/.zshrc if found
+# Source zshrc
 source_file "${HOME}/.zshrc"
 
 {{ if eq .osid "android" -}}
@@ -24,6 +32,15 @@ source_file "${HOME}/.zshrc"
 if [[ -z "${SSH_AUTH_SOCK}" ]]; then
     eval "$(ssh-agent -s)" &> /dev/null
     ssh-add "${HOME}/.ssh/*_rsa" &> /dev/null
+fi
+
+{{- end -}}
+{{ if eq .osid "linux-arch" -}}
+
+if [[ -z "$DISPLAY" && "$XDG_VTNR" -eq 1 ]]; then
+    exec Hyprland
+else
+    exec tmux
 fi
 
 {{- end -}}

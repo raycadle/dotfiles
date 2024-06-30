@@ -1,3 +1,4 @@
+###################
 #
 #     █████╗ ██╗     ██╗ █████╗ ███████╗██████╗  ██████╗
 #    ██╔══██╗██║     ██║██╔══██╗██╔════╝██╔══██╗██╔════╝
@@ -15,6 +16,9 @@
 # General
 alias q='exit'
 alias c='clear'
+
+# Admin Commands
+alias _='sudo'
 
 # Text Editor
 alias e="${EDITOR}"
@@ -95,11 +99,11 @@ alias cp='cp -r' # Copy files recursively
 #
 # Change to directory and list contents
 gl() {
-	local dir="${1:=$HOME}"
+	local dir="${1:-${HOME}}"
 	if [[ -d "${dir}" ]]; then
 		cd "${dir}" &>/dev/null
 		eza --icons=auto --group-directories-first
 	else
-		echo "bash: $dir: Directory not found"
+		echo "$(basename "$(echo ${SHELL})"): $dir: Directory not found"
 	fi
 }
