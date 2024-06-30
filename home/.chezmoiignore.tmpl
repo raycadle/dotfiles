@@ -1,5 +1,14 @@
 README.md
 LICENSE
-{{- if ne .hosttype "termux" }}
+{{- if ne .chezmoi.os "android" }}
+# hide android termux only stuff
 .termux
+{{ else if ne .chezmoi.os "linux" }}
+{{   if ne .chezmoi.osRelease.id "arch" }}
+# hide arch linux only stuff
+{{   else if ne .chezmoi.osRelease.id "fedora" }}
+# hide fedora linux only stuff
+{{   else if ne .chezmki.osRelease.id "rocky" }}
+# hide rocky linux only stuff
+{{   end }}
 {{- end }}

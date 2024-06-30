@@ -1,35 +1,31 @@
 #
-# ~/.bash_profile
+#    ██████╗  █████╗ ███████╗██╗  ██╗        ██████╗ ██████╗  ██████╗ ███████╗██╗██╗     ███████╗
+#    ██╔══██╗██╔══██╗██╔════╝██║  ██║        ██╔══██╗██╔══██╗██╔═══██╗██╔════╝██║██║     ██╔════╝
+#    ██████╔╝███████║███████╗███████║        ██████╔╝██████╔╝██║   ██║█████╗  ██║██║     █████╗  
+#    ██╔══██╗██╔══██║╚════██║██╔══██║        ██╔═══╝ ██╔══██╗██║   ██║██╔══╝  ██║██║     ██╔══╝  
+# ██╗██████╔╝██║  ██║███████║██║  ██║███████╗██║     ██║  ██║╚██████╔╝██║     ██║███████╗███████╗
+# ╚═╝╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚═╝     ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝╚══════╝
 #
-
 # Set umask
-umask 027
+umask 077
 
-# Set bash options
-export HISTFILESIZE=0
-export HISTCONTROL=ignoreboth:erasedups
+# Source ~/.envrc if found
+if [[ -f ~/.envrc ]]; then source ~/.envrc; fi
 
-# Set PATH variable
-export PATH="${PATH}:${HOME}/.local/bin"
+# Source ~/.bashrc if found
+if [[ -f ~/.bashrc ]]; then source ~/.bashrc; fi
 
-# Set EDITOR variable
-export EDITOR="${EDITOR:-nvim}"
-
-# Set XDG_BASE_DIRS variables
-export XDG_CONFIG_HOME="${HOME}/.config"
-export XDG_CACHE_HOME="${HOME}/.cache"
-export XDG_STATE_HOME="${HOME}/.local/state"
-export XDG_DATA_HOME="${HOME}/.local/share"
-export XDG_CONFIG_DIRS="${XDG_CONFIG_HOME}:/etc/xdg"
-export XDG_DATA_DIRS="${XDG_DATA_HOME}:/usr/local/share:/usr/share"
-
-{{ if eq .hosttype "termux" -}}
-# Start ssh-agent
+{{ if eq .osid "android" -}}
 if [[ -z "${SSH_AUTH_SOCK}" ]]; then
-  eval $(ssh-agent -s) &> /dev/null
-  ssh-add ~/.ssh/*_rsa ~/.ssh/*_ed25519 &> /dev/null
+    eval "$(ssh-agent -s)" &> /dev/null
+    ssh-add ~/.ssh/*_rsa &> /dev/null
 fi
 {{- end }}
 
-# Source ~/.bashrc if found
-[[ -f ~/.bashrc ]] && source ~/.bashrc
+{{ if eq .osid "linux-arch" -}}
+if [[ -z "$DISPLAY" && "$XDG_VTNR" -eq 1 ]]; then
+    exec Hyprland
+else
+    exec tmux
+fi
+{{- end -}}

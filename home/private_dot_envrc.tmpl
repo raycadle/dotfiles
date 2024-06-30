@@ -1,0 +1,42 @@
+#
+#    ███████╗███╗   ██╗██╗   ██╗██████╗  ██████╗
+#    ██╔════╝████╗  ██║██║   ██║██╔══██╗██╔════╝
+#    █████╗  ██╔██╗ ██║██║   ██║██████╔╝██║     
+#    ██╔══╝  ██║╚██╗██║╚██╗ ██╔╝██╔══██╗██║     
+# ██╗███████╗██║ ╚████║ ╚████╔╝ ██║  ██║╚██████╗
+# ╚═╝╚══════╝╚═╝  ╚═══╝  ╚═══╝  ╚═╝  ╚═╝ ╚═════╝
+#
+# Configure history
+export HISTFILESIZE=1000000
+export HISTSIZE=1000000
+export HISTCONTROL=ignoreboth:erasedups
+
+# Set PATH
+set_path() {
+    for i in "$@"; do
+        # Check if the directory exists
+        if [[ ! -d "${i}" ]]; then
+            mkdir -p "${i}"
+        fi
+	    # Check if it is not already in your $PATH.
+        if ! echo "${PATH}" | grep -Eq "(^|:)${i}(:|$)"; then
+		    # Then append it to $PATH and export it
+            export PATH="${PATH}:${i}"
+	    fi
+    done
+}
+set_path "${HOME}/.local/bin"
+
+# Set EDITOR & VISUAL
+export EDITOR="nvim"
+{{- if eq .osid "linux-fedora" -}}
+export VISUAL="codium"
+{{- end }}
+
+# Set XDG_BASE_DIRS
+export XDG_CONFIG_HOME="${HOME}/.config"
+export XDG_CACHE_HOME="${HOME}/.cache"
+export XDG_STATE_HOME="${HOME}/.local/state"
+export XDG_DATA_HOME="${HOME}/.local/share"
+export XDG_CONFIG_DIRS="${XDG_CONFIG_HOME}:/etc/xdg"
+export XDG_DATA_DIRS="${XDG_DATA_HOME}:/usr/local/share:/usr/share:/var/lib/flatpak/exports/share"

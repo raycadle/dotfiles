@@ -1,33 +1,120 @@
 #!{{ lookPath "bash" }}
-
+# shellcheck disable=SC1008,SC1009,SC1054,SC1056,SC1072,SC1073,SC1083
 set -eu
 
-# Prereq packages
+###########
+# Packages
+###########
+#
+# Add required packages in the respective section.
+# Packages must be located in the default repos
+# or the repos need to be added in the logic section.
+#
+
+# Mutual Packages
 prereqs=(
   "bash"
   "curl"
-  "git"
-  "lazygit"
   "neovim"
   "ripgrep"
   "fzf"
   "fd"
+  "eza"
+)
+
+# System-specific Packages
+{{- if eq .osid "android" }}
+
+# Termux Packages
+pkgs=(
+  "zsh"
+  "git"
+  "lazygit"
+  "neofetch"
+)
+
+{{- else if eq .osid "linux-arch" }}
+
+# Arch Linux Packages
+pkgs=(
+  "zsh"
+  "git"
+  "lazygit"
+  "neofetch"
+)
+
+{{- else if eq .osid "linux-fedora" }}
+
+# Fedora Linux Packages
+pkgs=(
+  "zsh"
+  "git"
+  "lazygit"
+  "neofetch"
+  "openrgb"
+)
+
+{{- else if eq .osid "linux-rocky" }}
+
+# Rocky Linux Packages
+pkgs=(
   "tmux"
 )
 
-{{ if eq .hosttype "termux" }}
+{{- end }}
+
+########
+# Logic
+########
+#
+# The different operations that need to be done per system type.
+#
+# Add system-specific packages to prereqs array for install
+for pkg in "${pkgs[@]}"; do
+  prereqs+=("${pkg}")
+done
+
+# Install packages from the prereqs array
+{{- if eq .osid "android" }}
+
 # Install prereqs
 apt update && apt install -y "${prereqs[@]}"
 
-# Install nerdfont
-curl -fLO https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/SourceCodePro/SauceCodeProNerdFontMono-Regular.ttf
-mv ~/SauceCodeProNerdFontMono-Regular.ttf ~/.termux/font.ttf
-{{ else }}
+{{- else if eq .osid "linux-arch" }}
+
 # Install prereqs
-yay -Sy --noconfirm "${prereqs[@]}"
+sudo pacman -Sy --noconfirm "${prereqs[@]}"
+
+{{- else if eq .osid "linux-fedora" "linux-rocky" }}
+
+# Install prereqs
+sudo dnf install -y "${prereqs[@]}"
+
+{{- end }}
+
+########
+# Fonts
+########
+#
+# Install desired fonts. Simply add to array and update system-specific commands.
+#
+
+{{- if eq .osid "linux-arch" "linux-fedora" }}
 
 # Install nerdfont
-mkdir -p ~/.local/share/fonts/SauceCodePro
-curl -fLO https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/SourceCodePro/SauceCodeProNerdFontMono-Regular.ttf -O https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/SourceCodePro/SauceCodeProNerdFont-Regular.ttf
-mv ~/SauceCode*.ttf ~/.local/share/fonts/SauceCodePro/
-{{ end -}}
+fonts=(
+  "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf"
+  "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf"
+  "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf"
+  "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf"
+)
+
+for font in "${fonts[@]}"; do
+  curl -fLO "${font}"
+done
+
+fonts_dir="${HOME}/.local/share/fonts/MesloLGS NF"
+mkdir -p "${fonts_dir}" && mv "${HOME}/*.ttf" "${fonts_dir}"
+fc-cache -v
+
+{{- end }}
