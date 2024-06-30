@@ -14,11 +14,7 @@ set -eu
 # Mutual Packages
 prereqs=(
   "bash"
-  "curl"
   "neovim"
-  "ripgrep"
-  "fzf"
-  "fd"
   "eza"
 )
 
@@ -31,6 +27,10 @@ pkgs=(
   "git"
   "lazygit"
   "neofetch"
+  "ripgrep"
+  "fzf"
+  "fd"
+  "make"
 )
 
 {{- else if eq .osid "linux-arch" }}
@@ -41,6 +41,12 @@ pkgs=(
   "git"
   "lazygit"
   "neofetch"
+  "ripgrep"
+  "fzf"
+  "fd"
+  "make"
+  "gcc"
+  "tmux"
 )
 
 {{- else if eq .osid "linux-fedora" }}
@@ -51,7 +57,13 @@ pkgs=(
   "git"
   "lazygit"
   "neofetch"
+  "ripgrep"
+  "fzf"
+  "fd-find"
+  "make"
+  "gcc"
   "openrgb"
+  "tmux"
 )
 
 {{- else if eq .osid "linux-rocky" }}
@@ -63,9 +75,9 @@ pkgs=(
 
 {{- end }}
 
-########
-# Logic
-########
+################
+# Install Logic
+################
 #
 # The different operations that need to be done per system type.
 #
@@ -77,17 +89,14 @@ done
 # Install packages from the prereqs array
 {{- if eq .osid "android" }}
 
-# Install prereqs
 apt update && apt install -y "${prereqs[@]}"
 
 {{- else if eq .osid "linux-arch" }}
 
-# Install prereqs
 sudo pacman -Sy --noconfirm "${prereqs[@]}"
 
 {{- else if eq .osid "linux-fedora" "linux-rocky" }}
 
-# Install prereqs
 sudo dnf install -y "${prereqs[@]}"
 
 {{- end }}
