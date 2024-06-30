@@ -49,5 +49,5 @@ white='\[\e[37m\]'   # White
 clear='\[\e[0m\]'      # Reset
 
 # Prompt
-export PS1="[${purple}\t${clear}]-[${green}\u${clear}@${green}\h${clear}]-[${cyan}\W${clear}]\n\$(if [[] \$? = 0 ]]; then echo ${green}\(^_^\)${clear}; else echo ${red}\(O_O\)${clear}; fi) \\$> "
+export PS1="[${purple}\t${clear}]-[${green}\u${clear}@${green}\h${clear}]-[${cyan}\W${clear}]\n\$(if [[ \$? = 0 ]]; then echo ${green}\(^_^\)${clear}; else echo ${red}\(O_O\)${clear}; fi) \\$> "
 
