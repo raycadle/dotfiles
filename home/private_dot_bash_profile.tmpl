@@ -1,3 +1,4 @@
+# shellcheck disable=all
 #
 #    ██████╗  █████╗ ███████╗██╗  ██╗        ██████╗ ██████╗  ██████╗ ███████╗██╗██╗     ███████╗
 #    ██╔══██╗██╔══██╗██╔════╝██║  ██║        ██╔══██╗██╔══██╗██╔═══██╗██╔════╝██║██║     ██╔════╝
@@ -9,23 +10,29 @@
 # Set umask
 umask 077
 
-# Source ~/.envrc if found
-if [[ -f ~/.envrc ]]; then source ~/.envrc; fi
+# Source file if exists
+source_file() { if [[ -f "${1}" ]]; then source "${1}"; fi }
+
+# Source ~/.config/sh/envrc if found
+source_file "${HOME}/.config/sh/envrc"
 
 # Source ~/.bashrc if found
-if [[ -f ~/.bashrc ]]; then source ~/.bashrc; fi
+source_file "${HOME}/.bashrc"
 
 {{ if eq .osid "android" -}}
+
 if [[ -z "${SSH_AUTH_SOCK}" ]]; then
     eval "$(ssh-agent -s)" &> /dev/null
-    ssh-add ~/.ssh/*_rsa &> /dev/null
+    ssh-add "${HOME}/.ssh/*_rsa" &> /dev/null
 fi
-{{- end }}
 
+{{- end -}}
 {{ if eq .osid "linux-arch" -}}
+
 if [[ -z "$DISPLAY" && "$XDG_VTNR" -eq 1 ]]; then
     exec Hyprland
 else
     exec tmux
 fi
+
 {{- end -}}

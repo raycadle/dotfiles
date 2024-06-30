@@ -1,5 +1,4 @@
 # shellcheck disable=all
-
 #
 #    ███████╗███████╗██╗  ██╗██████╗  ██████╗
 #    ╚══███╔╝██╔════╝██║  ██║██╔══██╗██╔════╝
@@ -8,24 +7,16 @@
 # ██╗███████╗███████║██║  ██║██║  ██║╚██████╗
 # ╚═╝╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝
 #
-#########
-# Themes
-#########
-#
-# Powerlevel10k
-source ~/.config/oh-my-zsh/themes/powerlevel10k/powerlevel10k.zsh-theme
+# Source file if exists
+source_file() { if [[ -f "${1}" ]]; then source "${1}"; fi }
 
-##########
-# Plugins
-##########
+################
+# Shell Options
+################
 #
-# Syntax Highlighting
-source ~/.config/oh-my-zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-# Command Suggestions
-source ~/.config/oh-my-zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-# 256 Terminal Colors
-source ~/.config/oh-my-zsh/plugins/zsh-256color/zsh-256color.plugin.zsh
-
+# Configure history
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_FIND_NO_DUPS
 
 ##########
 # Aliases
@@ -34,14 +25,38 @@ source ~/.config/oh-my-zsh/plugins/zsh-256color/zsh-256color.plugin.zsh
 # Unset all other aliases
 unalias -m "*"
 # Source custom aliases
-[[ ! -f ~/.aliasrc ]] || source ~/.aliasrc
+source_file "${HOME}/.config/sh/aliasrc"
+
+##########
+# Plugins
+##########
+#
+# Plugins Directory
+zsh_plugins="${HOME}/.config/zsh/plugins"
+# Syntax Highlighting
+source_file "${zsh_plugins}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+# Command Suggestions
+source_file "${zsh_plugins}/zsh-autosuggestions/zsh-autosuggestions.zsh"
+# 256 Terminal Colors
+source_file "${zsh_plugins}/zsh-256color/zsh-256color.plugin.zsh"
 
 #########
-# Prompt
+# Themes
 #########
 #
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# Themes Directory
+zsh_themes="${HOME}/.config/zsh/themes"
+# Powerlevel10k
+source_file "${zsh_themes}/powerlevel10k/powerlevel10k.zsh-theme"
 
-#Display Pokemon
+#################
+# Command Prompt
+#################
+#
+# P10K Prompt
+# To customize, run `p10k configure` or edit ~/.config/zsh/themes/powerlevel10k/p10k.zsh.
+source_file "${zsh_themes}/powerlevel10k/p10k.zsh"
+
+# Display Pokemon
 #pokemon-colorscripts --no-title -r 1,3,6
+

@@ -1,5 +1,4 @@
 # shellcheck disable=all
-
 #
 #    ███████╗██████╗ ██████╗  ██████╗ ███████╗██╗██╗     ███████╗
 #    ╚══███╔╝██╔══██╗██╔══██╗██╔═══██╗██╔════╝██║██║     ██╔════╝
@@ -8,6 +7,23 @@
 # ██╗███████╗██║     ██║  ██║╚██████╔╝██║     ██║███████╗███████╗
 # ╚═╝╚══════╝╚═╝     ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝╚══════╝
 #
-# Configure history
-setopt HIST_IGNORE_ALL_DUPS
-setopt HIST_FIND_NO_DUPS
+# Set umask
+umask 077
+
+# Source file if exists
+source_file() { if [[ -f "${1}" ]]; then source "${1}"; fi }
+
+# Source ~/.config/sh/envrc if found
+source_file "${HOME}/.config/sh/envrc"
+
+# Source ~/.zshrc if found
+source_file "${HOME}/.zshrc"
+
+{{ if eq .osid "android" -}}
+
+if [[ -z "${SSH_AUTH_SOCK}" ]]; then
+    eval "$(ssh-agent -s)" &> /dev/null
+    ssh-add "${HOME}/.ssh/*_rsa" &> /dev/null
+fi
+
+{{- end -}}

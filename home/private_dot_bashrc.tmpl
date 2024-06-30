@@ -1,3 +1,4 @@
+# shellcheck disable=all
 #
 #    ██████╗  █████╗ ███████╗██╗  ██╗██████╗  ██████╗
 #    ██╔══██╗██╔══██╗██╔════╝██║  ██║██╔══██╗██╔════╝
@@ -6,20 +7,36 @@
 # ██╗██████╔╝██║  ██║███████║██║  ██║██║  ██║╚██████╗
 # ╚═╝╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝
 #
+# Source file if exists
+source_file() { if [[ -f "${1}" ]]; then source "${1}"; fi }
+
+################
+# Shell Options
+################
 #
-shopt -s checkwinsize # Enable dynamic line wrap when terminal size changes
-shopt -s autocd # Enable changing dirs by entering dir only
-shopt -s cdspell # Enable spell correction when changing dirs
-shopt -s histappend # Enable appending commands to history file instead of overwriting
+# Enable dynamic line wrap when terminal size changes
+shopt -s checkwinsize
+
+# Enable changing dirs by entering dir only
+shopt -s autocd
+
+# Enable spell correction when changing dirs
+shopt -s cdspell
+
+# Enable appending commands to history file instead of overwriting
+shopt -s histappend
 
 ##########
 # Aliases
 ##########
-if [[ -f ~/.aliasrc ]]; then source ~/.aliasrc; fi
+#
+# Source custom aliases
+source_file "${HOME}/.config/sh/aliasrc"
 
 #################
 # Command Prompt
 #################
+#
 # Colors
 black='\[\e[30m\]'   # Black
 red='\[\e[31m\]'   # Red
@@ -31,13 +48,6 @@ cyan='\[\e[36m\]'   # Cyan
 white='\[\e[37m\]'   # White
 clear='\[\e[0m\]'      # Reset
 
-# Git Branch Status
-source ~/.config/git/git-prompt.sh
-export GIT_PS1_SHOWCOLORHINTS=1
-export GIT_PS1_SHOWDIRTYSTATE=1
-export GIT_PS1_SHOWSTASHSTATE=1
-export GIT_PS1_SHOWUNTRACKEDFILES=1
-export GIT_PS1_SHOWUPSTREAM=1
-
 # Prompt
-export PS1="[${purple}\t${clear}]-[${green}\u${clear}@${green}\h${clear}]-[${cyan}\W${clear}]\$(__git_ps1 "-[%s]")\n\$(if [[] \$? = 0 ]]; then echo ${green}\(^_^\)${clear}; else echo ${red}\(O_O\)${clear}; fi) \\$> "
+export PS1="[${purple}\t${clear}]-[${green}\u${clear}@${green}\h${clear}]-[${cyan}\W${clear}]\n\$(if [[] \$? = 0 ]]; then echo ${green}\(^_^\)${clear}; else echo ${red}\(O_O\)${clear}; fi) \\$> "
+
