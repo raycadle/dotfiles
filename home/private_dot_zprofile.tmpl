@@ -31,7 +31,7 @@ source_file "${HOME}/.zshrc"
 
 if [[ -z "${SSH_AUTH_SOCK}" ]]; then
     eval "$(ssh-agent -s)" &> /dev/null
-    ssh-add "${HOME}/.ssh/*_rsa" &> /dev/null
+    ssh-add "${HOME}"/.ssh/*_rsa &> /dev/null
 fi
 
 {{- end -}}
