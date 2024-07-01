@@ -6,5 +6,8 @@ Neovim Configuration
 -- Import Modules
 --------------------
 require("config.core") -- Neovim Options
-require("config.keymaps") -- Neovim Keymaps
+require("config.keys") -- Neovim Keymaps
+
+{{- if ne .osid "linux-rocky" -}}
 require("config.lazy") -- Lazy.nvim Options
+{{- end -}}
