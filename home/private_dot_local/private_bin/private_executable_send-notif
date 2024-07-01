@@ -1,7 +1,0 @@
-#!/bin/bash
-
-set -eu
-
-kdeconnect-cli \
-  --name="Pixel 5a 5G" \
-  --ping-msg="${1}"
