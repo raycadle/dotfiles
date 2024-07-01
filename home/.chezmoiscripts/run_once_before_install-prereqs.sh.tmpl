@@ -1,0 +1,154 @@
+#!{{ lookPath "bash" }}
+# shellcheck disable=SC1008,SC1009,SC1054,SC1056,SC1072,SC1073,SC1083
+set -eu
+
+###########
+# Packages
+###########
+#
+# Add required packages in the respective section.
+# Packages must be located in the default repos
+# or the repos need to be added in the logic section.
+#
+
+# Mutual Packages
+prereqs=(
+  "bash"
+  "neovim"
+  "eza"
+)
+
+# System-specific Packages
+{{- if eq .osid "android" }}
+
+# Termux Packages
+pkgs=(
+  "zsh"
+  "git"
+  "lazygit"
+  "neofetch"
+  "ripgrep"
+  "fzf"
+  "fd"
+  "make"
+)
+
+{{- else if eq .osid "linux-arch" }}
+
+# Arch Linux Packages
+pkgs=(
+  "zsh"
+  "git"
+  "lazygit"
+  "neofetch"
+  "ripgrep"
+  "fzf"
+  "fd"
+  "make"
+  "gcc"
+  "tmux"
+  "firefox"
+)
+
+{{- else if eq .osid "linux-fedora" }}
+
+# Fedora Linux Packages
+pkgs=(
+  "zsh"
+  "git"
+  "lazygit"
+  "neofetch"
+  "ripgrep"
+  "fzf"
+  "fd-find"
+  "make"
+  "gcc"
+  "tmux"
+  "openrgb"
+  "codium"
+  "brave-browser"
+)
+
+{{- else if eq .osid "linux-rocky" }}
+
+# Rocky Linux Packages
+pkgs=(
+  "tmux"
+)
+
+{{- end }}
+
+################
+# Install Logic
+################
+#
+# The different operations that need to be done per system type.
+#
+# Add system-specific packages to prereqs array for install
+for pkg in "${pkgs[@]}"; do
+  prereqs+=("${pkg}")
+done
+
+# Install packages from the prereqs array
+{{- if eq .osid "android" }}
+
+apt update && apt install -y "${prereqs[@]}"
+
+{{- else if eq .osid "linux-arch" }}
+
+sudo pacman -Sy --noconfirm "${prereqs[@]}"
+
+{{- else if eq .osid "linux-fedora" }}
+
+# Add VSCodium Repo
+sudo rpmkeys --import https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg
+printf "[vscodium]\nname=VSCodium\nbaseurl=https://download.vscodium.com/rpms/\nenabled=1\ngpgcheck=1\nrepo_gpgcheck=1\ngpgkey=https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg\nmetadata_expire=1h" | sudo tee -a /etc/yum.repos.d/vscodium.repo
+
+# Add Brave Browser Repo
+sudo dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
+sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
+
+sudo dnf install -y "${prereqs[@]}"
+
+{{- else if eq .osid "linux-arch" }}
+
+sudo dnf install -y "${prereqs[@]}"
+
+{{- end }}
+
+########
+# Fonts
+########
+#
+# Install desired fonts. Simply add to array and update system-specific commands.
+#
+
+{{- if ne .osid "linux-rocky" }}
+
+# Install nerdfont
+fonts=(
+  "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf"
+  "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf"
+  "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf"
+  "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf"
+)
+
+{{- end }}
+
+{{- if eq .osid "linux-arch" "linux-fedora" }}
+
+for font in "${fonts[@]}"; do
+  curl -fLO "${font}"
+done
+
+fonts_dir="${HOME}/.local/share/fonts/MesloLGS NF"
+mkdir -p "${fonts_dir}" && mv "${HOME}/*.ttf" "${fonts_dir}/"
+fc-cache -v
+
+{{- else if eq .osid "android" }}
+
+curl -fLO "${font[0]}"
+fonts_dir="${HOME}/.termux"
+mkdir -p "${fonts_dir}" && mv "${HOME}/*.ttf" "${fonts_dir}/"
+
+{{- end }}

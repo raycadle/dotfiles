@@ -1,0 +1,39 @@
+README.md
+LICENSE
+
+{{- if eq .osid "android" }}
+# if using Android, hide these and show everything else
+.config/OpenRGB/
+.config/VSCodium/
+.config/tmux/
+
+{{ end }}
+
+{{- if eq .osid "linux-arch" }}
+# if using Arch Linux, hide these and show everything else
+.config/OpenRGB/
+.config/VSCodium/
+.ssh/
+
+{{ end }}
+
+{{- if eq .osid "linux-fedora" }}
+# if using Fedora Linux, hide these and show everything else
+
+
+{{ end }}
+
+{{- if eq .osid "linux-rocky" }}
+# if using Rocky Linux, hide these and show everything else
+**/**
+!.bashrc
+!.bash_profile
+!.bash_logout
+!.config/zsh/aliasrc
+!.config/zsh/envrc
+!.config/tmux/
+!.config/nvim/init.lua
+!.config/nvim/lua/config/core.lua
+!.config/nvim/lua/config/keys.lua
+
+{{ end }}
