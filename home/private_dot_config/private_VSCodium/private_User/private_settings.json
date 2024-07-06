@@ -1,10 +1,14 @@
 {
-    "explorer.confirmDelete": false,
-    "git.autofetch": true,
     "files.autoSave": "onFocusChange",
-    "catppuccin.accentColor": "rosewater",
+    "workbench.startupEditor": "none",
+    "git.autofetch": true,
     "github.gitProtocol": "ssh",
+    "explorer.confirmDelete": false,
+    "editor.fontFamily": "'MesloLGS NF'",
+    "git.confirmSync": false,
+    "terminal.integrated.defaultProfile.linux": "zsh",
     "workbench.colorTheme": "Catppuccin Mocha",
+    "catppuccin.accentColor": "rosewater",
     // make Mocha specifically very dark
     // (this preserves other flavors!)
     "catppuccin.colorOverrides": {
@@ -20,9 +24,4 @@
             "statusBar.foreground": "accent"
         }
     },
-    "editor.fontFamily": "'SauceCodePro Nerd Font Mono', 'Droid Sans Mono', 'monospace', monospace",
-    "window.menuBarVisibility": "toggle",
-    "workbench.startupEditor": "none",
-    "git.confirmSync": false,
-    "terminal.integrated.defaultProfile.linux": "zsh"
 }
