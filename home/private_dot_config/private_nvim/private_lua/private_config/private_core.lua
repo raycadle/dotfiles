@@ -13,14 +13,6 @@ vg.loaded_ruby_provider = 0
 vg.loaded_node_provider = 0
 vg.loaded_perl_provider = 0
 
--- Sync clipboard between OS and Neovim
-vg.clipboard = {
-  name = "termux-clipboard",
-  copy = { ["+"] = { "termux-clipboard-set" }, ["*"] = { "termux-clipboard-set" } },
-  paste = { ["+"] = { "termux-clipboard-get" }, ["*"] = { "termux-clipboard-get" } },
-  cache_enabled = true
-}
-
 vo.mouse = "a" -- Enable mouse mode
 vo.ignorecase = true -- Case insensitive searching 
 vo.smartcase = true -- UNLESS /C or capital in search
