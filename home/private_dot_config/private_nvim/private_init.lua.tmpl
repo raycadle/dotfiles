@@ -7,7 +7,6 @@ Neovim Configuration
 --------------------
 require("config.core") -- Neovim Options
 require("config.keys") -- Neovim Keymaps
-
-{{- if ne .osid "linux-rocky" -}}
+{{ if ne .osid "linux-rocky" }}
 require("config.lazy") -- Lazy.nvim Options
-{{- end -}}
+{{ end }}
