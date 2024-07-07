@@ -147,7 +147,7 @@ fc-cache -v
 
 {{- else if eq .osid "android" }}
 
-curl -fLO "${font[0]}"
+curl -fLO "${fonts[0]}"
 fonts_dir="${HOME}/.termux"
 mkdir -p "${fonts_dir}" && mv "${HOME}/*.ttf" "${fonts_dir}/"
 
