@@ -21,12 +21,12 @@ chezmoi init --apply --verbose https://github.com/N3WK1D/dotfiles.git
 
 If chezmoi is not found in the distro's repos, run:
 ```shell
-sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply N3WK1D
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply raycadle
 ```
 
 For a one-shot install, run:
 ```shell
-sh -c "$(curl -fsLS get.chezmoi.io)" -- init --one-shot N3WK1D
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init --one-shot raycadle
 ```
 
 ## Reference
