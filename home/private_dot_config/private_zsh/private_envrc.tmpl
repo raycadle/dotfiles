@@ -25,7 +25,7 @@ set_path "${HOME}/.local/bin"
 
 # Set EDITOR & VISUAL
 export EDITOR="nvim"
-{{- if eq .osid "linux-fedora" -}}
+{{ if eq .osid "linux-fedora" -}}
 export VISUAL="codium"
 {{- end }}
 
