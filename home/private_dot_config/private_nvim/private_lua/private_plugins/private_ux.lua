@@ -124,9 +124,10 @@ return {
       vim.o.timeout = true
       vim.o.timeoutlen = 300
     end,
-    opts = {
-      defaults = {
-          mode = { "n", "v" },
+    config = function(_, opts)
+        local wk = require("which-key")
+        wk.add({
+        mode = { "n", "v" },
           { "<leader><tab>", group = "tabs" },
           { "<leader>b", group = "buffer" },
           { "<leader>f", group = "file/find" },
@@ -140,13 +141,8 @@ return {
           { "[", group = "prev" },
           { "]", group = "next" },
           { "g", group = "goto" },
-          { "gz", group = "surround" },         
-      },
-    },
-    config = function(_, opts)
-        local wk = require("which-key")
-        wk.setup(opts)
-        wk.register(opts.defaults)
+          { "gz", group = "surround" },
+        })
     end,
   },
   {
