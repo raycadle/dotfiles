@@ -56,7 +56,6 @@ pkgs=(
 pkgs=(
   "zsh"
   "git"
-  "lazygit"
   "neofetch"
   "ripgrep"
   "fzf"
@@ -142,13 +141,13 @@ for font in "${fonts[@]}"; do
 done
 
 fonts_dir="${HOME}/.local/share/fonts/MesloLGS NF"
-mkdir -p "${fonts_dir}" && mv "${HOME}/*.ttf" "${fonts_dir}/"
+mkdir -p "${fonts_dir}" && mv "${HOME}"/*.ttf "${fonts_dir}"/
 fc-cache -v
 
 {{- else if eq .osid "android" }}
 
-curl -fLO "${font[0]}"
+curl -fLO "${fonts[0]}"
 fonts_dir="${HOME}/.termux"
-mkdir -p "${fonts_dir}" && mv "${HOME}/*.ttf" "${fonts_dir}/"
+mkdir -p "${fonts_dir}" && mv "${HOME}"/*.ttf "${fonts_dir}/font.ttf"
 
 {{- end }}
