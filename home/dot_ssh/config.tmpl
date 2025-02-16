@@ -1,0 +1,28 @@
+{{- if eq .osid "android" -}}
+
+Host lan
+    Hostname lan
+    User root
+    IdentityFile ~/.ssh/nighthawk_ed25519
+
+Host rocky
+    Hostname rocky.lan
+    User admin
+    IdentityFile ~/.ssh/rocky_ed25519
+
+Host fedora
+    Hostname fedora.lan
+    User raycadle
+    IdentityFile ~/.ssh/fedora_ed25519
+
+{{- else if eq .osid "linux-fedora" -}}
+
+Host lan
+    Hostname lan
+    User root
+
+Host rocky
+    Hostname rocky.lan
+    User admin
+
+{{- end -}}

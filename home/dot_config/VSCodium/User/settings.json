@@ -1,0 +1,27 @@
+{
+    "files.autoSave": "onFocusChange",
+    "workbench.startupEditor": "none",
+    "git.autofetch": true,
+    "github.gitProtocol": "ssh",
+    "explorer.confirmDelete": false,
+    "editor.fontFamily": "'MesloLGS NF'",
+    "git.confirmSync": false,
+    "terminal.integrated.defaultProfile.linux": "zsh",
+    "workbench.colorTheme": "Catppuccin Mocha",
+    "catppuccin.accentColor": "rosewater",
+    // make Mocha specifically very dark
+    // (this preserves other flavors!)
+    "catppuccin.colorOverrides": {
+        "mocha": {
+            //"base": "#000000",
+            //"mantle": "#010101",
+            //"crust": "#020202"
+        }
+    },
+    // use your accent (pink) on the statusBar as well
+    "catppuccin.customUIColors": {
+        "mocha": {
+            "statusBar.foreground": "accent"
+        }
+    },
+}

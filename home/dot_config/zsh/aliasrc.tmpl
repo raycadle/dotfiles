@@ -1,0 +1,117 @@
+###################
+#
+#     █████╗ ██╗     ██╗ █████╗ ███████╗██████╗  ██████╗
+#    ██╔══██╗██║     ██║██╔══██╗██╔════╝██╔══██╗██╔════╝
+#    ███████║██║     ██║███████║███████╗██████╔╝██║     
+#    ██╔══██║██║     ██║██╔══██║╚════██║██╔══██╗██║     
+# ██╗██║  ██║███████╗██║██║  ██║███████║██║  ██║╚██████╗
+# ╚═╝╚═╝  ╚═╝╚══════╝╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ ╚═════╝
+#
+##########
+# Aliases
+##########
+#
+# Frequently Used Commands
+#
+# General
+alias q='exit'
+alias c='clear'
+
+# Admin Commands
+alias _='sudo'
+
+# Text Editor
+alias e="${EDITOR}"
+{{ if eq .osid "linux-fedora" -}}
+alias v="${VISUAL}"
+{{- end }}
+
+# Changing Directories
+alias g='cd'
+alias r='cd -'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ......='cd ../../../../..'
+
+# Listing Directory Contents
+alias l='eza --icons=auto --group-directories-first' # short list
+alias ld='eza -D --icons=auto' # short list dirs
+alias lf='eza -f --icons=auto' # short list files
+alias la='eza -a --icons=auto --group-directories-first' # short list all
+alias ll='eza -1 --icons=auto --group-directories-first' # long list
+alias lld='eza -1D --icons=auto' # long list dirs
+alias llf='eza -1f --icons=auto' # long list files
+alias lla='eza -1a --icons=auto --group-directories-first' # long list all
+alias lll='eza -lh --icons=auto --group-directories-first' # long list info
+alias llld='eza -lhD --icons=auto' # long list info dirs
+alias lllf='eza -lhf --icons=auto' # long list info file
+alias llla='eza -lha --icons=auto --group-directories-first' # long list info all
+
+# Search Command History
+alias h='history'
+alias hl='history | less'
+alias hs='history | grep'
+alias hsi='history | grep -i'
+
+# DNF Commands
+alias dnfl="dnf list"                       # List packages
+alias dnfli="dnf list installed"            # List installed packages
+alias dnfgl="dnf grouplist"                 # List package groups
+alias dnfmc="dnf makecache"                 # Generate metadata cache
+alias dnfp="dnf info"                       # Show package information
+alias dnfs="dnf search"                     # Search package
+
+alias dnfu="sudo dnf upgrade"               # Upgrade package
+alias dnfi="sudo dnf install"               # Install package
+alias dnfgi="sudo dnf groupinstall"         # Install package group
+alias dnfr="sudo dnf remove"                # Remove package
+alias dnfgr="sudo dnf groupremove"          # Remove package group
+alias dnfc="sudo dnf clean all"             # Clean cache
+
+# Git Commands
+alias gs='git status'
+alias ga='git add'
+alias gr='git restore'
+alias gc='git commit'
+alias gcm='git commit -m'
+alias gpl='git pull'
+alias gps='git push'
+alias gf='git fetch'
+alias gb='git branch'
+alias gbd='git branch -d'
+alias gco='git checkout'
+alias gcom='git checkout main'
+alias gcod='git checkout dev'
+alias gd='git diff'
+alias lg='lazygit --use-config-file="${HOME}/.config/lazygit/config.yml,${HOME}/.config/lazygit/theme.yml"'
+
+# Chezmoi Commands
+alias cz='chezmoi'
+alias czu='chezmoi update'
+alias czd='chezmoi cd'
+alias cze='chezmoi edit'
+alias cza='chezmoi apply'
+alias czea='chezmoi edit --apply'
+alias czdf='chezmoi diff'
+
+# Modify Existing Commands
+alias mkdir='mkdir -p' # Create parent directories if non-existing
+alias rm='rm -Ir' # Prompt for confirmation before deleting files
+alias cp='cp -r' # Copy files recursively
+
+############
+# Functions
+############
+#
+# Change to directory and list contents
+gl() {
+	local dir="${1:-${HOME}}"
+	if [[ -d "${dir}" ]]; then
+		cd "${dir}" &>/dev/null
+		eza --icons=auto --group-directories-first
+	else
+		echo "$(basename "$(echo ${SHELL})"): $dir: Directory not found"
+	fi
+}
