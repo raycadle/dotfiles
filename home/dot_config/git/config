@@ -1,0 +1,31 @@
+[user]
+	name = Ray Cadle
+	email = 93884664+raycadle@users.noreply.github.com
+
+[init]
+	defaultBranch = main
+
+[status]
+  branch = true
+  short = true
+
+[commit]
+  template = ~/.config/git/template
+
+[push]
+  default = current # Push only current branch
+  autoSetupRemote = true # Easier to push new branches
+
+[pull]
+  rebase = true
+
+[rebase]
+  autoStash = true
+
+# URL Shortcuts
+#
+[url "git@github.com:raycadle/"]
+  insteadOf = "ray:"
+
+[url "https://github.com/"]
+  insteadOf = "gh/"
