@@ -1,0 +1,171 @@
+###################
+#
+#     █████╗ ██╗     ██╗ █████╗ ███████╗██████╗  ██████╗
+#    ██╔══██╗██║     ██║██╔══██╗██╔════╝██╔══██╗██╔════╝
+#    ███████║██║     ██║███████║███████╗██████╔╝██║     
+#    ██╔══██║██║     ██║██╔══██║╚════██║██╔══██╗██║     
+# ██╗██║  ██║███████╗██║██║  ██║███████║██║  ██║╚██████╗
+# ╚═╝╚═╝  ╚═╝╚══════╝╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ ╚═════╝
+#
+##########
+# Aliases
+##########
+#
+# General
+alias q="exit"
+alias c="clear"
+
+# Admin Commands
+alias _="sudo"
+
+# Text Editor
+alias e="${EDITOR}"
+
+# Changing Directories
+alias g="cd"
+alias r="cd -"
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ......="cd ../../../../.."
+
+# Listing Directory Contents
+alias l="eza -1 --icons=auto --group-directories-first" # list
+alias la="eza -1a --icons=auto --group-directories-first" # list all
+alias ld="eza -1D --icons=auto" # list dirs
+alias lad="eza -1aD --icons=auto" # list dirs
+alias lf="eza -1f --icons=auto" # list files
+alias laf="eza -1af --icons=auto" # list files
+alias ll="eza -lh --icons=auto --group-directories-first" # long list info
+alias lla="eza -lha --icons=auto --group-directories-first" # list info all
+alias lld="eza -lhD --icons=auto" # list info dirs
+alias llad="eza -lhaD --icons=auto" # list info dirs
+alias llf="eza -lhf --icons=auto" # list info file
+alias llaf="eza -lhaf --icons=auto" # list info file
+
+# Search Command History
+alias h="history | less"
+alias hs="history | grep"
+alias hsi="history | grep -i"
+
+# DNF Commands
+alias dnfl="sudo dnf list" # List packages
+alias dnfli="sudo dnf list installed" # List installed packages
+alias dnfgl="sudo dnf grouplist" # List package groups
+alias dnfmc="sudo dnf makecache" # Generate metadata cache
+alias dnfp="sudo dnf info" # Show package information
+alias dnfs="sudo dnf search" # Search package
+alias dnfu="sudo dnf upgrade" # Upgrade package
+alias dnfi="sudo dnf install" # Install package
+alias dnfgi="sudo dnf groupinstall" # Install package group
+alias dnfr="sudo dnf remove" # Remove package
+alias dnfgr="sudo dnf groupremove" # Remove package group
+alias dnfc="sudo dnf clean all" # Clean cache
+
+# Git Commands
+alias gi="git init"
+alias gcl="git clone"
+alias gs="git status"
+alias gd="git diff"
+alias ga="git add"
+alias gr="git restore"
+alias grs="git restore --staged"
+alias gc="git commit"
+alias gcm="git commit -m"
+alias gpl="git pull"
+alias gps="git push"
+alias gf="git fetch"
+alias gb="git branch"
+alias gbd="git branch -d"
+alias gco="git checkout"
+
+# Chezmoi Commands
+alias cz="chezmoi"
+alias czu="chezmoi update"
+alias czg="chezmoi cd"
+alias cze="chezmoi edit"
+alias cza="chezmoi apply"
+alias czea="chezmoi edit --apply"
+alias czd="chezmoi diff"
+
+# Tmux Commands
+alias t="tmux"
+alias ta="tmux a"
+alias tl="tmux list-sessions"
+alias tn="tmux new-session -s"
+
+# Modify Existing Commands
+alias mkdir="mkdir -p" # Create parent directories if non-existing
+alias rm="rm -I" # Prompt for confirmation before deleting files
+alias rmr="rm -Ir" # Prompt for confirmation before deleting files recursively
+alias cp="cp -r" # Copy files recursively
+
+# Shorten Long Commands
+alias mkexe="chmod +x" # Makes a file executable
+
+############
+# Functions
+############
+#
+# Change to directory and list contents
+gl() {
+	local dir="${1:-${HOME}}"
+	if [[ -d "${dir}" ]]; then
+		cd "${dir}" &>/dev/null
+		eza -1 --icons=auto --group-directories-first
+	else
+		echo "$(basename "$(echo ${SHELL})"): $dir: Directory not found"
+	fi
+}
+
+new-script() {
+  local file
+  if [[ -n "${1}" ]]; then
+    file="${HOME}/.local/bin/${1}"
+  else
+    read -rp "Enter the name of your new script: " file
+  fi
+  
+  if [[ -e "$file" ]]; then
+    echo "Error: '$file' already exists."
+    return 1
+  fi
+
+  ext="${file##*.}"
+  case "${ext}" in
+    sh)
+      cat << 'EOF' > "${file}"
+#!/bin/bash
+      
+set -eu
+      
+main() {
+    # Logic goes here
+}
+      
+main "$@"
+
+EOF
+      ;;
+    py)
+      cat << EOF > "${file}"
+#!/usr/bin/env python3
+
+def main():
+    # Logic goes here
+
+if __name__ == "__main__":
+    main()
+
+EOF
+      ;;
+    *)
+      echo "Error: Unsupported extension '${ext}'. Only .sh and .py are currently supported."
+      return 1
+      ;;
+  esac
+  
+  chmod +x "${file}"
+  echo "Created '${file}' with executable permissions."
+}

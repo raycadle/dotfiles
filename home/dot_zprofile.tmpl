@@ -1,0 +1,44 @@
+###################
+#
+#    ███████╗██████╗ ██████╗  ██████╗ ███████╗██╗██╗     ███████╗
+#    ╚══███╔╝██╔══██╗██╔══██╗██╔═══██╗██╔════╝██║██║     ██╔════╝
+#      ███╔╝ ██████╔╝██████╔╝██║   ██║█████╗  ██║██║     █████╗  
+#     ███╔╝  ██╔═══╝ ██╔══██╗██║   ██║██╔══╝  ██║██║     ██╔══╝  
+# ██╗███████╗██║     ██║  ██║╚██████╔╝██║     ██║███████╗███████╗
+# ╚═╝╚══════╝╚═╝     ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝╚══════╝
+#
+###################
+# Helper Functions
+###################
+#
+# Source single file if exists
+source_file() { if [[ -f "${1}" ]]; then source "${1}"; fi }
+
+###################
+# Configuration
+###################
+#
+# Set umask
+umask 077
+
+# Source envrc
+source_file "${HOME}/.config/zsh/envrc"
+
+{{ if eq .osid "android" -}}
+
+# Add SSH keys to SSH Agent
+if [[ -z "${SSH_AUTH_SOCK}" ]]; then
+  eval "$(ssh-agent -s)" &> /dev/null
+  ssh-add "${HOME}"/.ssh/*_ed25519 &> /dev/null
+fi
+
+{{- end }}
+{{ if eq .osid "linux-arch" -}}
+
+if [[ -z "$DISPLAY" && "$XDG_VTNR" -eq 1 ]]; then
+  exec Hyprland
+else
+  exec tmux
+fi
+
+{{- end -}}

@@ -1,0 +1,82 @@
+###################
+#
+#    ███████╗███████╗██╗  ██╗██████╗  ██████╗
+#    ╚══███╔╝██╔════╝██║  ██║██╔══██╗██╔════╝
+#      ███╔╝ ███████╗███████║██████╔╝██║     
+#     ███╔╝  ╚════██║██╔══██║██╔══██╗██║     
+# ██╗███████╗███████║██║  ██║██║  ██║╚██████╗
+# ╚═╝╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝
+#
+###################
+# Helper Functions
+###################
+#
+# Source single file if exists
+source_file() { if [[ -f "${1}" ]]; then source "${1}"; fi }
+
+# Load plugins
+load_plugins() {
+  for plugin in "${plugins[@]}"; do
+    source_file "${ZDOTDIR}/plugins/${plugin}/${plugin}.zsh"
+  done
+}
+
+################
+# Shell Options
+################
+#
+# Configure history
+setopt inc_append_history share_history
+setopt hist_ignore_all_dups hist_find_no_dups
+
+bindkey "^H" backward-delete-char
+bindkey "^?" backward-delete-char
+
+##########
+# Aliases
+##########
+#
+# Unset all other aliases
+unalias -m "*"
+
+# Source custom aliases
+source_file "${ZDOTDIR}/aliasrc"
+
+##########
+# Plugins
+##########
+#
+# Plugins List
+# Add plugin names to list here.
+# Plugins must be in a directory of the same name.
+# E.g.: ${ZDOTDIR}/plugins/example/example.zsh
+plugins=(
+  "zsh-syntax-highlighting" # Syntax Highlighting
+  "zsh-autosuggestions" # Command Suggestions
+  "zsh-256color" # 256 Terminal Colors
+)
+load_plugins
+
+#########
+# Prompt
+#########
+#
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+if [[ "${TTY}" =~ /dev/pts/[0-9] ]]; then
+  # Prompt for GUI Terminals
+  source_file "${ZDOTDIR}/themes/powerlevel10k/powerlevel10k.zsh-theme"
+  source_file "${ZDOTDIR}/themes/powerlevel10k/p10k.zsh"
+elif [[ "${TTY}" =~ /dev/tty[0-9] ]]; then
+  # Prompt for TTY
+  precmd () { print -P "[%F{red}%*%f]-[%F{green}%n%f@%F{green}%m%f]-[%F{cyan}%1~%f]" }
+  PROMPT="%(?|%F{green}(^_^%)%f|%F{red}(O_O%)%f)%#> "
+else
+  # Prompt for Other TTY Types
+  PROMPT="[%n@%m %1~] %#> "
+fi
