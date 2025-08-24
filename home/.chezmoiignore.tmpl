@@ -1,0 +1,23 @@
+**/**
+!.zprofile
+!.config/zsh/
+!.config/nvim/
+
+{{- if eq .osid "android" -}}
+
+!.termux/
+!.config/git/
+
+{{- else if eq .osid "linux-arch" -}}
+
+
+
+{{- else if eq .osid "linux-fedora" -}}
+
+!.config/git/
+
+{{- else if eq .osid "linux-rocky" -}}
+
+!.config/tmux/
+
+{{- end -}}
