@@ -1,2 +1,2 @@
 # dotfiles
-~/ is where the &lt;3 is
+~/ is where the <3 is
