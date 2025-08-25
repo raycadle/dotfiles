@@ -74,9 +74,9 @@ if [[ "${TTY}" =~ /dev/pts/[0-9] ]]; then
   source_file "${ZDOTDIR}/themes/powerlevel10k/p10k.zsh"
 elif [[ "${TTY}" =~ /dev/tty[0-9] ]]; then
   # Prompt for TTY
-  precmd () { print -P "[%F{red}%*%f]-[%F{green}%n%f@%F{green}%m%f]-[%F{cyan}%1~%f]" }
-  PROMPT="%(?|%F{green}(^_^%)%f|%F{red}(O_O%)%f)%#> "
+  precmd () { print -P "\\n%F{cyan}%~%f" }
+  PROMPT="%(?|%F{green}>%f|%F{red}>%f) "
 else
   # Prompt for Other TTY Types
-  PROMPT="[%n@%m %1~] %#> "
+  PROMPT="> "
 fi
