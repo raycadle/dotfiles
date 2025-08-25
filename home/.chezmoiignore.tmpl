@@ -1,8 +1,13 @@
 {{- if ne .osid "android" }}
 .termux/
 .config/git/
+{{- end }}
+{{- if ne .osid "linux-arch" }}
+{{- end }}
 {{- if ne .osid "linux-fedora" }}
 .config/git/
+{{- end }}
 {{- if ne .osid "linux-rocky" }}
 .config/tmux/
+{{- end }}
 {{- end }}
