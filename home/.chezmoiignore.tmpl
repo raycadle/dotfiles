@@ -1,23 +1,18 @@
-**/**
-!.zprofile
-!.config/zsh/
-!.config/nvim/
+{{- if ne .osid "android" }}
 
-{{- if eq .osid "android" -}}
+.termux/
+.config/git/
 
-!.termux/
-!.config/git/
-
-{{- else if eq .osid "linux-arch" -}}
+{{- if ne .osid "linux-arch" }}
 
 
 
-{{- else if eq .osid "linux-fedora" -}}
+{{- if ne .osid "linux-fedora" }}
 
-!.config/git/
+.config/git/
 
-{{- else if eq .osid "linux-rocky" -}}
+{{- if ne .osid "linux-rocky" }}
 
-!.config/tmux/
+.config/tmux/
 
-{{- end -}}
+{{- end }}
