@@ -24,7 +24,7 @@ umask 077
 # Source envrc
 source_file "${HOME}/.config/zsh/envrc"
 
-{{ if eq .osid "android" -}}
+{{- if eq .osid "android" }}
 
 # Add SSH keys to SSH Agent
 if [[ -z "${SSH_AUTH_SOCK}" ]]; then
@@ -33,7 +33,7 @@ if [[ -z "${SSH_AUTH_SOCK}" ]]; then
 fi
 
 {{- end }}
-{{ if eq .osid "linux-arch" -}}
+{{- if eq .osid "linux-arch" }}
 
 if [[ -z "$DISPLAY" && "$XDG_VTNR" -eq 1 ]]; then
   exec Hyprland
@@ -41,4 +41,4 @@ else
   exec tmux
 fi
 
-{{- end -}}
+{{- end }}
