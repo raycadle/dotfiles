@@ -34,7 +34,7 @@ pkgs=(
 )
 
 echo "Installing packages..."
-sudo pacman -Sy --noconfirm "${pkgs[@]}"
+sudo pacman -Sy --noconfirm --needed "${pkgs[@]}"
 echo "Packages successfully installed."
 
 {{- else if eq .osid "linux-fedora" }}
