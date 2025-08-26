@@ -337,7 +337,7 @@ local function setup_dynamic_statusline()
       " ",
       mode_icon(),
       " ",
-      "%#StatusLine#",
+      "%#Normal#",
       " %t %m%r",
       "%=",
       mode_color(),
