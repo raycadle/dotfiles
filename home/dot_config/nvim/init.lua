@@ -45,7 +45,6 @@ vim.opt.termguicolors = true -- Enable 24-bit colors
 vim.opt.showmatch = true -- Highlight matching brackets
 vim.opt.matchtime = 2 -- How long to show matching bracket
 vim.opt.cmdheight = 0 -- Command line height
-vim.opt.showcmdloc = "statusline"
 vim.opt.laststatus = 3 -- Set statusline to always display
 vim.opt.completeopt = "menuone,noinsert,noselect" -- Completion options 
 vim.opt.showmode = false -- Don't show mode in command line 
@@ -274,6 +273,8 @@ end
 ============================================================================
 --]]
 
+vim.api.nvim_set_hl(0, "Normal", { bg = "black", fg = "white" })
+
 -- Mode Indicator
 local function mode_icon()
   local current_mode = vim.fn.mode()
@@ -300,9 +301,9 @@ vim.cmd([[
     highlight StatusLineBold gui=bold cterm=bold
     highlight StatusLineAccent guibg=#89b4fa ctermbg=blue
     highlight StatusLineInsertAccent guibg=#a6e3a1 ctermbg=green
-    highlight StatusLineVisualAccent guibg=#cba6f7 ctermbg=135
+    highlight StatusLineVisualAccent guibg=#cba6f7 ctermbg=magenta
     highlight StatusLineReplaceAccent guibg=#f38ba8 ctermbg=red
-    highlight StatusLineCmdLineAccent guibg=#fab387 ctermbg=242
+    highlight StatusLineCmdLineAccent guibg=#f9e2af ctermbg=yellow
     highlight StatusLineTerminalAccent guibg=#a6e3a1 ctermbg=green
 ]])
 
@@ -331,25 +332,36 @@ end
 local function setup_dynamic_statusline()
   vim.api.nvim_create_autocmd({"WinEnter", "BufEnter", "ModeChanged"}, {
     callback = function()
-    vim.opt_local.statusline = table.concat {
-      "%#StatusLineBold#",
-      mode_color(),
-      " ",
-      mode_icon(),
-      " ",
-      "%#Normal#",
-      " %t %m%r",
-      "%=",
-      mode_color(),
-      " %l/%L:%c ",
-    }
+      vim.opt_local.statusline = table.concat {
+        "%#StatusLineBold#",
+        mode_color(),
+        " ",
+        mode_icon(),
+        " ",
+        "%#Normal#",
+        " %t %m%r",
+        "%=",
+        mode_color(),
+        " %l/%L:%c ",
+      }
     end
   })
   vim.api.nvim_set_hl(0, "StatusLineBold", { bold = true })
 
   vim.api.nvim_create_autocmd({"WinLeave", "BufLeave"}, {
     callback = function()
-      vim.opt_local.statusline = " %t %m%r %= %l/%L:%c "
+      vim.opt_local.statusline = table.concat {
+        "%#StatusLineBold#",
+        "%#StatusLine#",
+        " ",
+        mode_icon(),
+        " ",
+        "%#Normal#",
+        " %t %m%r",
+        "%=",
+        "%#StatusLine#",
+        " %l/%L:%c ",
+      }
     end
   })
 end
@@ -414,6 +426,33 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   end,
 })
 
+-- Open file in new vertical window split
+local function open_file_in_vsplit()
+  vim.ui.input({ prompt = 'File to open in vertical split: ', completion = 'file' }, function(input)
+    if input and input ~= '' then
+      vim.cmd('vsplit ' .. input)
+    end
+  end)
+end
+
+-- Open file in new horizontal window split
+local function open_file_in_hsplit()
+  vim.ui.input({ prompt = 'File to open in vertical split: ', completion = 'file' }, function(input)
+    if input and input ~= '' then
+      vim.cmd('split ' .. input)
+    end
+  end)
+end
+
+-- Open file in current window
+local function edit_file()
+  vim.ui.input({ prompt = 'File to edit: ', completion = 'file' }, function(input)
+    if input and input ~= '' then
+      vim.cmd('e ' .. input)
+    end
+  end)
+end
+
 --[[
 ============================================================================
 
@@ -441,8 +480,10 @@ map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
 -- New File
 map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New file" })
 
+map("n", "<leader>e", edit_file, { desc = "Edit file in current window" })
+
 -- Quick File Navigation
-map("n", "<leader>e", "<cmd>Explore<CR>", { desc = "Open file explorer" })
+map("n", "<leader>fe", "<cmd>Explore<CR>", { desc = "Open file explorer" })
 map("n", "<leader>ff", "<cmd>find ", { desc = "Find file" })
 
 -- Clear Search With <esc>
@@ -468,20 +509,20 @@ end, { noremap = true, silent = true, desc = "Close floating terminal from termi
 -- Windows
 map("n", "<leader>ww", "<C-w>p", { desc = "Other window", remap = true })
 map("n", "<leader>wd", "<C-w>c", { desc = "Delete window", remap = true })
-map("n", "<leader>wh", "<C-w>s", { desc = "Split window horizontally", remap = true })
-map("n", "<leader>wv", "<C-w>v", { desc = "Split window vertically", remap = true })
+map("n", "<leader>w-", open_file_in_hsplit, { desc = "Split window horizontally", remap = true })
+map("n", "<leader>w\\", open_file_in_vsplit, { desc = "Split window vertically", remap = true })
 
 -- Move to Window Using the <ctrl> hjkl Keys
-map("n", "<C-h>", "<C-w>h", { desc = "Go to left window", remap = true })
-map("n", "<C-j>", "<C-w>j", { desc = "Go to lower window", remap = true })
-map("n", "<C-k>", "<C-w>k", { desc = "Go to upper window", remap = true })
-map("n", "<C-l>", "<C-w>l", { desc = "Go to right window", remap = true })
+map("n", "<leader>wh", "<C-w>h", { desc = "Go to left window", remap = true })
+map("n", "<leader>wj", "<C-w>j", { desc = "Go to lower window", remap = true })
+map("n", "<leader>wk", "<C-w>k", { desc = "Go to upper window", remap = true })
+map("n", "<leader>wl", "<C-w>l", { desc = "Go to right window", remap = true })
 
 -- Resize Window Using <ctrl> Arrow Keys
-map("n", "<C-UP>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
-map("n", "<C-DOWN>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
-map("n", "<C-LEFT>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
-map("n", "<C-RIGHT>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
+map("n", "<C-k>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
+map("n", "<C-j>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
+map("n", "<C-h>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
+map("n", "<C-l>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
 
 -- Move Lines
 map("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move down" })
@@ -498,12 +539,12 @@ map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 map('n', '<leader>bd', smart_close_buffer, { desc = 'Smart close buffer/tab' })
 
 -- Tabs
-map("n", "<leader><tab>f", "<cmd>tabfirst<cr>", { desc = "First Tab" })
-map("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Last Tab" })
 map("n", "<leader><tab><tab>", "<cmd>tabnew<cr>", { desc = "New Tab" })
 map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 map("n", "<leader><tab>n", "<cmd>tabnext<cr>", { desc = "Next Tab" })
 map("n", "<leader><tab>p", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+map("n", "<leader><tab>f", "<cmd>tabfirst<cr>", { desc = "First Tab" })
+map("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Last Tab" })
 map('n', '<leader><tab>>', '<cmd>tabmove +1<CR>', { desc = 'Move Tab Right' })
 map('n', '<leader><tab><', '<cmd>tabmove -1<CR>', { desc = 'Move tab left' })
 map('n', '<leader><tab>O', open_file_in_tab, { desc = 'Open file in new tab' })

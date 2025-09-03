@@ -33,12 +33,48 @@ if [[ -z "${SSH_AUTH_SOCK}" ]]; then
 fi
 
 {{- end }}
+{{- if eq .osid "linux-rocky" }}
+
+# Login through tmux
+if command -v tmux &> /dev/null; then
+  # Check if we're already inside a tmux session
+  if [[ -z "$TMUX" ]]; then
+    tmux new-session -As main
+  fi
+  if ! tmux has-session -t main &> /dev/null; then
+    exit
+  fi
+fi
+
+{{- end }}
 {{- if eq .osid "linux-arch" }}
 
 if [[ -z "$DISPLAY" && "$XDG_VTNR" -eq 1 ]]; then
-  exec Hyprland
+  if command -v Hyprland &> /dev/null; then
+    exec Hyprland
+  else
+    # Login through tmux
+    if command -v tmux &> /dev/null; then
+      # Check if we're already inside a tmux session
+      if [[ -z "$TMUX" ]]; then
+        tmux new-session -As main
+      fi
+      if ! tmux has-session -t main &> /dev/null; then
+        exit
+      fi 
+    fi
+  fi
 else
-  exec tmux
+  # Login through tmux
+  if command -v tmux &> /dev/null; then
+    # Check if we're already inside a tmux session
+    if [[ -z "$TMUX" ]]; then
+      tmux new-session -As main
+    fi
+    if ! tmux has-session -t main &> /dev/null; then
+      exit
+    fi
+  fi
 fi
 
 {{- end }}

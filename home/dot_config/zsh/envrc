@@ -33,9 +33,9 @@ export XDG_STATE_HOME="${HOME}/.local/state"
 export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
 
 # Configure history
-HISTSIZE=10000
-SAVEHIST=10000
-HISTFILE="${XDG_CACHE_HOME}/zsh_history"
+export HISTSIZE=10000
+export SAVEHIST=10000
+export HISTFILE="${XDG_CACHE_HOME}/zsh_history"
 
 # History files for other packages
 export LESSHISTFILE="${XDG_CACHE_HOME}/less_history"
