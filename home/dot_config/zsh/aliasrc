@@ -115,14 +115,14 @@ alias mkexe="chmod +x" # Makes a file executable
 gl() {
 	local dir="${1:-${HOME}}"
 	if [[ -d "${dir}" ]]; then
-		cd "${dir}" &>/dev/null
+		cd "${dir}" &>/dev/null || return
 		eza -1 --icons=auto --group-directories-first
 	else
-		echo "$(basename "$(echo ${SHELL})"): $dir: Directory not found"
+		echo "$(basename "${SHELL}"): $dir: Directory not found"
 	fi
 }
 
-s() {
+new_script() {
   local file
   if [[ -n "${1}" ]]; then
     file="${HOME}/.local/bin/${1}"
@@ -171,4 +171,47 @@ EOF
   
   chmod +x "${file}"
   echo "Created '${file}' with executable permissions."
+}
+
+sync_repos() {
+  local REPOS=(
+    "git@github.com:raycadle/dotfiles.git"
+    "git@github.com:raycadle/media-manager.git"
+    "git@github.com:raycadle/walthemer.git"
+  )
+
+  local TARGET_DIR="${1:-${HOME}/projects}"
+
+  local CLONE="⬇️"
+  local CLONE_SUCCESS="⬇️✅"
+  local CLONE_FAILURE="⬇️❌"
+  local PULL="🔄"
+  local PULL_SUCCESS="🔄✅"
+  local PULL_FAILURE="🔄❌"
+
+  mkdir -p "${TARGET_DIR}"
+
+  for REPO_URL in "${REPOS[@]}"; do
+    local REPO_NAME
+    REPO_NAME="$(basename "${REPO_URL}" .git)"
+    local REPO_DIR="${TARGET_DIR}/${REPO_NAME}"
+
+    if [[ -d "${REPO_DIR}" ]]; then
+      echo "${PULL} Pulling latest changes for '${REPO_NAME}'..."
+      pushd "${REPO_DIR}" > /dev/null || { echo "${PULL_FAILURE} Failed to enter '${REPO_DIR}'"; continue; }
+      if command git pull; then
+        echo "${PULL_SUCCESS} Pulled '${REPO_NAME}'"
+      else
+        echo "${PULL_FAILURE} Failed to pull '${REPO_NAME}'"
+      fi
+      popd > /dev/null || return
+    else
+      echo "${CLONE} Cloning '${REPO_NAME}'..."
+      if command git clone "${REPO_URL}" "${REPO_DIR}"; then
+        echo "${CLONE_SUCCESS} Cloned '${REPO_NAME}'"
+      else
+        echo "${CLONE_FAILURE} Failed to clone '${REPO_NAME}'"
+      fi
+    fi
+  done
 }
