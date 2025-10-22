@@ -1,3 +1,6 @@
+[core]
+  commentChar = ";"
+
 [user]
 	name = Ray Cadle
 	email = 93884664+raycadle@users.noreply.github.com
