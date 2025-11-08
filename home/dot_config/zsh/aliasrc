@@ -117,17 +117,6 @@ alias mkexe="chmod +x" # Makes a file executable
 # Functions
 ############
 #
-# Change to directory and list contents
-gl() {
-	local dir="${1:-${HOME}}"
-	if [[ -d "${dir}" ]]; then
-		cd "${dir}" &>/dev/null || return
-		eza -1 --icons=auto --group-directories-first
-	else
-		echo "$(basename "${SHELL}"): $dir: Directory not found"
-	fi
-}
-
 new_script() {
   local file
   if [[ -n "${1}" ]]; then
