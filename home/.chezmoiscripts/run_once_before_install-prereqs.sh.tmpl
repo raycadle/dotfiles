@@ -6,40 +6,7 @@ set -eu
 # Install Packages
 ###################
 
-{{- if eq .osid "android" }}
-
-pkgs=(
-  "zsh"
-  "neovim"
-  "eza"
-  "ripgrep"
-  "fzf"
-  "git"
-  "fd"
-  "tmux"
-)
-
-echo "Installing packages..."
-pkg install "${pkgs[@]}"
-echo "Packages successfully installed."
-
-{{- else if eq .osid "linux-arch" }}
-
-pkgs=(
-  "zsh"
-  "neovim"
-  "eza"
-  "ripgrep"
-  "fzf"
-  "fd"
-  "tmux"
-)
-
-echo "Installing packages..."
-sudo pacman -Sy --noconfirm --needed "${pkgs[@]}"
-echo "Packages successfully installed."
-
-{{- else if eq .osid "linux-fedora" }}
+{{- if eq .osid "linux-fedora" }}
 
 pkgs=(
   "zsh"
@@ -89,6 +56,39 @@ pkgs=(
 
 echo "Installing packages..."
 sudo dnf install -y "${pkgs[@]}"
+echo "Packages successfully installed."
+
+{{- else if eq .osid "linux-arch" }}
+
+pkgs=(
+  "zsh"
+  "neovim"
+  "eza"
+  "ripgrep"
+  "fzf"
+  "fd"
+  "tmux"
+)
+
+echo "Installing packages..."
+sudo pacman -Sy --noconfirm --needed "${pkgs[@]}"
+echo "Packages successfully installed."
+
+{{- else if eq .osid "android" }}
+
+pkgs=(
+  "zsh"
+  "neovim"
+  "eza"
+  "ripgrep"
+  "fzf"
+  "git"
+  "fd"
+  "tmux"
+)
+
+echo "Installing packages..."
+pkg install "${pkgs[@]}"
 echo "Packages successfully installed."
 
 {{- end }}
