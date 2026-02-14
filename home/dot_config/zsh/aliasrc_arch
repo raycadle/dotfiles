@@ -1,0 +1,94 @@
+###################
+#
+#     █████╗ ██╗     ██╗ █████╗ ███████╗██████╗  ██████╗
+#    ██╔══██╗██║     ██║██╔══██╗██╔════╝██╔══██╗██╔════╝
+#    ███████║██║     ██║███████║███████╗██████╔╝██║     
+#    ██╔══██║██║     ██║██╔══██║╚════██║██╔══██╗██║     
+# ██╗██║  ██║███████╗██║██║  ██║███████║██║  ██║╚██████╗
+# ╚═╝╚═╝  ╚═╝╚══════╝╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ ╚═════╝
+#
+##########
+# Aliases
+##########
+#
+# General
+alias q="exit"
+alias c="clear"
+
+# Admin Commands
+alias _="sudo"
+
+# Text Editor
+alias e="${EDITOR}"
+
+# Changing Directories
+alias g="cd"
+alias r="cd -"
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ......="cd ../../../../.."
+
+# Listing Directory Contents
+alias l="eza -1 --icons=auto --group-directories-first" # list
+alias la="eza -1a --icons=auto --group-directories-first" # list all
+alias ld="eza -1D --icons=auto" # list dirs
+alias lad="eza -1aD --icons=auto" # list dirs
+alias lf="eza -1f --icons=auto" # list files
+alias laf="eza -1af --icons=auto" # list files
+alias ll="eza -lh --icons=auto --group-directories-first" # long list info
+alias lla="eza -lha --icons=auto --group-directories-first" # list info all
+alias lld="eza -lhD --icons=auto" # list info dirs
+alias llad="eza -lhaD --icons=auto" # list info dirs
+alias llf="eza -lhf --icons=auto" # list info file
+alias llaf="eza -lhaf --icons=auto" # list info file
+
+# Search Command History
+alias h="history | less"
+alias hs="history | grep"
+alias hsi="history | grep -i"
+
+# Package Manager Commands
+alias pkgi="sudo pacman -S" # install packages
+
+# Git Commands
+alias gi="git init"
+alias gcl="git clone"
+alias gs="git status"
+alias gd="git diff"
+alias ga="git add"
+alias ga.="git add ."
+alias gr="git restore"
+alias grs="git restore --staged"
+alias gc="git commit"
+alias gcm="git commit -m"
+alias gcp="git cherry-pick"
+alias gpl="git pull"
+alias gps="git push"
+alias gpso="git push origin"
+alias gf="git fetch"
+alias gb="git branch"
+alias gbd="git branch -d"
+alias gbv="git branch -v"
+alias gbvv="git branch -vv"
+alias gco="git checkout"
+alias gl="git log"
+alias glo="git log --oneline"
+
+# Tmux Commands
+alias t="tmux"
+alias tl="tmux ls"
+alias tn="tmux new -As"
+alias ta="tmux attach -t"
+alias tr="tmux rename -t"
+alias tk="tmux kill-session -t"
+
+# Modify Existing Commands
+alias mkdir="mkdir -p" # Create parent directories if non-existing
+alias rm="rm -I" # Prompt for confirmation before deleting files
+alias rmr="rm -Ir" # Prompt for confirmation before deleting files recursively
+alias cp="cp -r" # Copy files recursively
+
+# Shorten Long Commands
+alias mkexe="chmod +x" # Makes a file executable
