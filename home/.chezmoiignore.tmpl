@@ -1,12 +1,16 @@
-{{- if ne .osid "android" }}
-.termux/
-.config/git/
-{{- end }}
-{{- if ne .osid "linux-arch" }}
-{{- end }}
-{{- if ne .osid "linux-fedora" }}
-.config/git/
-{{- end }}
-{{- if ne .osid "linux-rocky" }}
+{{- $archOnly := list "linux-arch" -}}
+{{- $fedoraOnly := list "linux-fedora" -}}
+{{- $rockyOnly := list "linux-rocky" -}}
+{{- $archRocky := list "linux-arch" "linux-rocky" -}}
+{{- $archFedora := list "linux-arch" "linux-fedora" -}}
+{{- $fedoraRocky := list "linux-fedora" "linux-rocky" -}}
+{{- if not (has $archRocky .osid) -}}
+
 .config/tmux/
-{{- end }}
+
+{{- end -}}
+{{- if not (has $archFedora .osid) -}}
+
+.config/git/
+
+{{- end -}}
