@@ -1,0 +1,56 @@
+###################
+#
+#     █████╗ ██╗     ██╗ █████╗ ███████╗██████╗  ██████╗
+#    ██╔══██╗██║     ██║██╔══██╗██╔════╝██╔══██╗██╔════╝
+#    ███████║██║     ██║███████║███████╗██████╔╝██║     
+#    ██╔══██║██║     ██║██╔══██║╚════██║██╔══██╗██║     
+# ██╗██║  ██║███████╗██║██║  ██║███████║██║  ██║╚██████╗
+# ╚═╝╚═╝  ╚═╝╚══════╝╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ ╚═════╝
+#
+##########
+# Aliases
+##########
+#
+# General
+alias q="exit"
+alias c="clear"
+
+# Admin Commands
+alias _="sudo"
+
+# Text Editor
+alias e="${EDITOR}"
+
+# Changing Directories
+alias g="cd"
+alias r="cd -"
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ......="cd ../../../../.."
+
+# Search Command History
+alias h="history | less"
+alias hs="history | grep"
+alias hsi="history | grep -i"
+
+# Modify Existing Commands
+alias mkdir="mkdir -p" # Create parent directories if non-existing
+alias rm="rm -I" # Prompt for confirmation before deleting files
+alias rmr="rm -Ir" # Prompt for confirmation before deleting files recursively
+alias cp="cp -r" # Copy files recursively
+
+# Shorten Long Commands
+alias mkexe="chmod +x" # Makes a file executable
+
+# ----------------------
+# Host-specific Aliases
+# ----------------------
+{{- if eq .osid "linux-arch" }}
+{{ include "dot_config/zsh/aliasrc_arch" }}
+{{- else if eq .osid "linux-fedora" }}
+{{ include "dot_config/zsh/aliasrc_fedora" }}
+{{- else if eq .osid "linux-rocky" }}
+{{ include "dot_config/zsh/aliasrc_rocky" }}
+{{- end -}}
