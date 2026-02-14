@@ -87,23 +87,6 @@ alias gco="git checkout"
 alias gl="git log"
 alias glo="git log --oneline"
 
-# Chezmoi Commands
-alias cz="chezmoi"
-alias czu="chezmoi update"
-alias czg="chezmoi cd"
-alias cze="chezmoi edit"
-alias cza="chezmoi apply"
-alias czea="chezmoi edit --apply"
-alias czd="chezmoi diff"
-
-# Tmux Commands
-alias t="tmux"
-alias tl="tmux ls"
-alias tn="tmux new -As"
-alias ta="tmux attach -t"
-alias tr="tmux rename -t"
-alias tk="tmux kill-session -t"
-
 # Modify Existing Commands
 alias mkdir="mkdir -p" # Create parent directories if non-existing
 alias rm="rm -I" # Prompt for confirmation before deleting files
