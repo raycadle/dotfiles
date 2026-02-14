@@ -1,35 +1,3 @@
-###################
-#
-#     █████╗ ██╗     ██╗ █████╗ ███████╗██████╗  ██████╗
-#    ██╔══██╗██║     ██║██╔══██╗██╔════╝██╔══██╗██╔════╝
-#    ███████║██║     ██║███████║███████╗██████╔╝██║     
-#    ██╔══██║██║     ██║██╔══██║╚════██║██╔══██╗██║     
-# ██╗██║  ██║███████╗██║██║  ██║███████║██║  ██║╚██████╗
-# ╚═╝╚═╝  ╚═╝╚══════╝╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ ╚═════╝
-#
-##########
-# Aliases
-##########
-#
-# General
-alias q="exit"
-alias c="clear"
-
-# Admin Commands
-alias _="sudo"
-
-# Text Editor
-alias e="${EDITOR}"
-
-# Changing Directories
-alias g="cd"
-alias r="cd -"
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias .....="cd ../../../.."
-alias ......="cd ../../../../.."
-
 # Listing Directory Contents
 alias l="eza -1 --icons=auto --group-directories-first" # list
 alias la="eza -1a --icons=auto --group-directories-first" # list all
@@ -43,11 +11,6 @@ alias lld="eza -lhD --icons=auto" # list info dirs
 alias llad="eza -lhaD --icons=auto" # list info dirs
 alias llf="eza -lhf --icons=auto" # list info file
 alias llaf="eza -lhaf --icons=auto" # list info file
-
-# Search Command History
-alias h="history | less"
-alias hs="history | grep"
-alias hsi="history | grep -i"
 
 # DNF Commands
 alias dnfl="sudo dnf list" # List packages
@@ -86,15 +49,6 @@ alias gbvv="git branch -vv"
 alias gco="git checkout"
 alias gl="git log"
 alias glo="git log --oneline"
-
-# Modify Existing Commands
-alias mkdir="mkdir -p" # Create parent directories if non-existing
-alias rm="rm -I" # Prompt for confirmation before deleting files
-alias rmr="rm -Ir" # Prompt for confirmation before deleting files recursively
-alias cp="cp -r" # Copy files recursively
-
-# Shorten Long Commands
-alias mkexe="chmod +x" # Makes a file executable
 
 ############
 # Functions
