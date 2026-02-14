@@ -1,45 +1,8 @@
-###################
-#
-#     █████╗ ██╗     ██╗ █████╗ ███████╗██████╗  ██████╗
-#    ██╔══██╗██║     ██║██╔══██╗██╔════╝██╔══██╗██╔════╝
-#    ███████║██║     ██║███████║███████╗██████╔╝██║     
-#    ██╔══██║██║     ██║██╔══██║╚════██║██╔══██╗██║     
-# ██╗██║  ██║███████╗██║██║  ██║███████║██║  ██║╚██████╗
-# ╚═╝╚═╝  ╚═╝╚══════╝╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ ╚═════╝
-#
-##########
-# Aliases
-##########
-#
-# General
-alias q="exit"
-alias c="clear"
-
-# Admin Commands
-alias _="sudo"
-
-# Text Editor
-alias e="${EDITOR}"
-
-# Changing Directories
-alias g="cd"
-alias r="cd -"
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias .....="cd ../../../.."
-alias ......="cd ../../../../.."
-
 # Listing Directory Contents
 alias l="ls -1 --group-directories-first" # list
 alias la="ls -1a --group-directories-first" # list all
 alias ll="ls -lh --group-directories-first" # long list info
 alias lla="ls -lha --group-directories-first" # list info all
-
-# Search Command History
-alias h="history | less"
-alias hs="history | grep"
-alias hsi="history | grep -i"
 
 # DNF Commands
 alias dnfl="sudo dnf list" # List packages
@@ -54,14 +17,6 @@ alias dnfgi="sudo dnf groupinstall" # Install package group
 alias dnfr="sudo dnf remove" # Remove package
 alias dnfgr="sudo dnf groupremove" # Remove package group
 alias dnfc="sudo dnf clean all" # Clean cache
-
-# Tmux Commands
-alias t="tmux"
-alias tl="tmux ls"
-alias tn="tmux new -As"
-alias ta="tmux attach -t"
-alias tr="tmux rename -t"
-alias tk="tmux kill-session -t"
 
 # Modify Existing Commands
 alias mkdir="mkdir -p" # Create parent directories if non-existing
