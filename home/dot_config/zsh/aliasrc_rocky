@@ -1,3 +1,14 @@
+#############################################
+#
+# ██████╗  ██████╗  ██████╗██╗  ██╗██╗   ██╗
+# ██╔══██╗██╔═══██╗██╔════╝██║ ██╔╝╚██╗ ██╔╝
+# ██████╔╝██║   ██║██║     █████╔╝  ╚████╔╝ 
+# ██╔══██╗██║   ██║██║     ██╔═██╗   ╚██╔╝  
+# ██║  ██║╚██████╔╝╚██████╗██║  ██╗   ██║   
+# ╚═╝  ╚═╝ ╚═════╝  ╚═════╝╚═╝  ╚═╝   ╚═╝   
+#
+#############################################
+#
 # Listing Directory Contents
 alias l="ls -1 --group-directories-first" # list
 alias la="ls -1a --group-directories-first" # list all
@@ -17,12 +28,3 @@ alias dnfgi="sudo dnf groupinstall" # Install package group
 alias dnfr="sudo dnf remove" # Remove package
 alias dnfgr="sudo dnf groupremove" # Remove package group
 alias dnfc="sudo dnf clean all" # Clean cache
-
-# Modify Existing Commands
-alias mkdir="mkdir -p" # Create parent directories if non-existing
-alias rm="rm -I" # Prompt for confirmation before deleting files
-alias rmr="rm -Ir" # Prompt for confirmation before deleting files recursively
-alias cp="cp -r" # Copy files recursively
-
-# Shorten Long Commands
-alias mkexe="chmod +x" # Makes a file executable
