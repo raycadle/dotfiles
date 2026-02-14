@@ -24,15 +24,7 @@ umask 077
 # Source envrc
 source_file "${HOME}/.config/zsh/envrc"
 
-{{ if eq .osid "android" -}}
-
-# Add SSH keys to SSH Agent
-if [[ -z "${SSH_AUTH_SOCK}" ]]; then
-  eval "$(ssh-agent -s)" &> /dev/null
-  ssh-add "${HOME}"/.ssh/*_ed25519 &> /dev/null
-fi
-
-{{ else if eq .osid "linux-rocky" -}}
+{{ if eq .osid "linux-rocky" -}}
 
 # Login through tmux
 if command -v tmux &> /dev/null; then
