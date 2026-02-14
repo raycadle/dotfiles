@@ -13,12 +13,5 @@ alias llf="eza -lhf --icons=auto" # list info file
 alias llaf="eza -lhaf --icons=auto" # list info file
 
 # Package Manager Commands
+alias pkg="sudo pacman" # package manager
 alias pkgi="sudo pacman -S" # install packages
-
-# Tmux Commands
-alias t="tmux"
-alias tl="tmux ls"
-alias tn="tmux new -As"
-alias ta="tmux attach -t"
-alias tr="tmux rename -t"
-alias tk="tmux kill-session -t"
