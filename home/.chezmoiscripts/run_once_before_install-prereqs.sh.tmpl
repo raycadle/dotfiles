@@ -74,23 +74,6 @@ echo "Installing packages..."
 sudo pacman -Sy --noconfirm --needed "${pkgs[@]}"
 echo "Packages successfully installed."
 
-{{- else if eq .osid "android" }}
-
-pkgs=(
-  "zsh"
-  "neovim"
-  "eza"
-  "ripgrep"
-  "fzf"
-  "git"
-  "fd"
-  "tmux"
-)
-
-echo "Installing packages..."
-pkg install "${pkgs[@]}"
-echo "Packages successfully installed."
-
 {{- end }}
 
 ########
@@ -108,7 +91,7 @@ fonts=(
   "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf"
 )
 
-{{- if eq .osid "linux-fedora" }}
+{{ if eq .osid "linux-fedora" -}}
 
 for font in "${fonts[@]}"; do
   curl -fLO "${font}"
@@ -117,14 +100,5 @@ done
 fonts_dir="${HOME}/.local/share/fonts/MesloLGS NF"
 mkdir -p "${fonts_dir}" && mv "${HOME}"/*.ttf "${fonts_dir}"/
 fc-cache -v
-
-{{- else if eq .osid "android" }}
-
-curl -fLO "${fonts[0]}"
-fonts_dir="${HOME}/.termux"
-mkdir -p "${fonts_dir}" && mv "${HOME}"/*.ttf "${fonts_dir}/font.ttf"
-
-# Remove default motd
-rm "${PREFIX}"/etc/motd
 
 {{- end -}}
