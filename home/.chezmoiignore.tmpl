@@ -4,12 +4,12 @@
 {{- $archRocky := list "linux-arch" "linux-rocky" -}}
 {{- $archFedora := list "linux-arch" "linux-fedora" -}}
 {{- $fedoraRocky := list "linux-fedora" "linux-rocky" -}}
-{{- if not (has $archRocky .osid) -}}
+{{- if not (has .osid $archRocky) -}}
 
 .config/tmux/
 
 {{- end -}}
-{{- if not (has $archFedora .osid) -}}
+{{- if not (has .osid $archFedora) -}}
 
 .config/git/
 
