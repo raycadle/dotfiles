@@ -4,11 +4,6 @@
 {{- $archRocky := list "linux-arch" "linux-rocky" -}}
 {{- $archFedora := list "linux-arch" "linux-fedora" -}}
 {{- $fedoraRocky := list "linux-fedora" "linux-rocky" -}}
-{{- if not (has .osid $rockyOnly) -}}
-
-.config/nvim/
-
-{{- end -}}
 {{- if not (has .osid $archRocky) -}}
 
 .config/tmux/
@@ -17,5 +12,6 @@
 {{- if not (has .osid $archFedora) -}}
 
 .config/git/
+.config/nvim/
 
 {{- end -}}
