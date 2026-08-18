@@ -6,15 +6,7 @@
 ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║
 ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
 ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
-    
---]]
 
---[[
-============================================================================
-
-    GENERAL CONFIGURATION
-
-============================================================================
 --]]
 
 -- Basic Settings
@@ -299,12 +291,12 @@ end
 -- Define highlight groups for each mode
 vim.cmd([[
     highlight StatusLineBold gui=bold cterm=bold
-    highlight StatusLineAccent guibg=#89b4fa ctermbg=blue
-    highlight StatusLineInsertAccent guibg=#a6e3a1 ctermbg=green
-    highlight StatusLineVisualAccent guibg=#cba6f7 ctermbg=magenta
-    highlight StatusLineReplaceAccent guibg=#f38ba8 ctermbg=red
-    highlight StatusLineCmdLineAccent guibg=#f9e2af ctermbg=yellow
-    highlight StatusLineTerminalAccent guibg=#a6e3a1 ctermbg=green
+    highlight StatusLineAccent guibg=#89b4fa guifg=black ctermbg=blue
+    highlight StatusLineInsertAccent guibg=#a6e3a1 guifg=black ctermbg=green
+    highlight StatusLineVisualAccent guibg=#cba6f7 guifg=black ctermbg=magenta
+    highlight StatusLineReplaceAccent guibg=#f38ba8 guifg=black ctermbg=red
+    highlight StatusLineCmdLineAccent guibg=#f9e2af guifg=black ctermbg=yellow
+    highlight StatusLineTerminalAccent guibg=#a6e3a1 guifg=black ctermbg=green
 ]])
 
 local function mode_color()

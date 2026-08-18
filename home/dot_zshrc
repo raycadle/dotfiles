@@ -1,4 +1,4 @@
-###################
+##############################################
 #
 #    ███████╗███████╗██╗  ██╗██████╗  ██████╗
 #    ╚══███╔╝██╔════╝██║  ██║██╔══██╗██╔════╝
@@ -7,7 +7,14 @@
 # ██╗███████╗███████║██║  ██║██║  ██║╚██████╗
 # ╚═╝╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝
 #
-###################
+##############################################
+# Variables
+############
+#
+export ZSH_DIR="${HOME}/.config/zsh"
+export ZSH_THEMES="${ZSH_DIR}/themes"
+export ZSH_PLUGINS="${ZSH_DIR}/plugins"
+
 # Helper Functions
 ###################
 #
@@ -17,11 +24,10 @@ source_file() { if [[ -f "${1}" ]]; then source "${1}"; fi }
 # Load plugins
 load_plugins() {
   for plugin in "${plugins[@]}"; do
-    source_file "${ZDOTDIR}/plugins/${plugin}/${plugin}.zsh"
+    source_file "${ZSH_PLUGINS}/${plugin}/${plugin}.zsh"
   done
 }
 
-################
 # Shell Options
 ################
 #
@@ -32,7 +38,21 @@ setopt hist_ignore_all_dups hist_find_no_dups
 bindkey "^H" backward-delete-char
 bindkey "^?" backward-delete-char
 
-##########
+# Set umask
+umask 077
+
+# Enable vi-mode
+bindkey -v
+
+# Source fzf-zsh completions
+source <(fzf --zsh)
+
+# Environment
+##############
+#
+# Source envrc
+source_file "${ZSH_DIR}/envrc"
+
 # Aliases
 ##########
 #
@@ -40,16 +60,15 @@ bindkey "^?" backward-delete-char
 unalias -m "*"
 
 # Source custom aliases
-source_file "${ZDOTDIR}/aliasrc"
+source_file "${ZSH_DIR}/aliasrc"
 
-##########
 # Plugins
 ##########
 #
 # Plugins List
 # Add plugin names to list here.
 # Plugins must be in a directory of the same name.
-# E.g.: ${ZDOTDIR}/plugins/example/example.zsh
+# E.g.: ${ZSH_DIR}/plugins/example/example.zsh
 plugins=(
   "zsh-syntax-highlighting" # Syntax Highlighting
   "zsh-autosuggestions" # Command Suggestions
@@ -57,22 +76,19 @@ plugins=(
 )
 load_plugins
 
-#########
 # Prompt
 #########
 #
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
+# Enable Powerlevel10k instant prompt
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-if [[ "${TTY}" =~ /dev/pts/[0-9] ]]; then
+if [[ "${TTY}" =~ /dev/pts/* ]]; then
   # Prompt for GUI Terminals
-  source_file "${ZDOTDIR}/themes/powerlevel10k/powerlevel10k.zsh-theme"
-  source_file "${ZDOTDIR}/themes/powerlevel10k/p10k.zsh"
-elif [[ "${TTY}" =~ /dev/tty[0-9] ]]; then
+  source_file "${ZSH_THEMES}/powerlevel10k/powerlevel10k.zsh-theme"
+  source_file "${ZSH_THEMES}/powerlevel10k/p10k.zsh"
+elif [[ "${TTY}" =~ /dev/tty* ]]; then
   # Prompt for TTY
   precmd () { print -P "\\n%F{cyan}%~%f" }
   PROMPT="%(?|%F{green}>%f|%F{red}>%f) "
@@ -80,3 +96,4 @@ else
   # Prompt for Other TTY Types
   PROMPT="> "
 fi
+

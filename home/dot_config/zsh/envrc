@@ -1,26 +1,25 @@
-###################
+##############################################
 #
-#    ███████╗███╗   ██╗██╗   ██╗██████╗  ██████╗
-#    ██╔════╝████╗  ██║██║   ██║██╔══██╗██╔════╝
-#    █████╗  ██╔██╗ ██║██║   ██║██████╔╝██║     
-#    ██╔══╝  ██║╚██╗██║╚██╗ ██╔╝██╔══██╗██║     
-# ██╗███████╗██║ ╚████║ ╚████╔╝ ██║  ██║╚██████╗
-# ╚═╝╚══════╝╚═╝  ╚═══╝  ╚═══╝  ╚═╝  ╚═╝ ╚═════╝
+# ███████╗███╗   ██╗██╗   ██╗██████╗  ██████╗
+# ██╔════╝████╗  ██║██║   ██║██╔══██╗██╔════╝
+# █████╗  ██╔██╗ ██║██║   ██║██████╔╝██║     
+# ██╔══╝  ██║╚██╗██║╚██╗ ██╔╝██╔══██╗██║     
+# ███████╗██║ ╚████║ ╚████╔╝ ██║  ██║╚██████╗
+# ╚══════╝╚═╝  ╚═══╝  ╚═══╝  ╚═╝  ╚═╝ ╚═════╝
 #
-###################
-# General Environment Variables
+##############################################
+# General Config
 ###################
 #
 # Set PATH
-set_path() {
-    for i in "$@"; do
-        # Check if the directory exists
-        if [[ ! -d "${i}" ]]; then mkdir -p "${i}"; fi
-	    # Check if it is not already in your $PATH. Then append it to $PATH and export it
-        if ! echo "${PATH}" | grep -Eq "(^|:)${i}(:|$)"; then export PATH="${PATH}:${i}"; fi
-    done
-}
-set_path "${HOME}/.local/bin"
+export PATH="${PATH}:${HOME}/.local/bin"
+
+# Set EDITOR
+{{- if eq .osid "linux-rocky" -}}
+export EDITOR="vi"
+{{- else -}}
+export EDITOR="nvim"
+{{- end }}
 
 # Set XDG_BASE_DIRS
 export XDG_CONFIG_HOME="${HOME}/.config"
@@ -28,14 +27,10 @@ export XDG_CACHE_HOME="${HOME}/.cache"
 export XDG_DATA_HOME="${HOME}/.local/share"
 export XDG_STATE_HOME="${HOME}/.local/state"
 
-# Bootstrap .zshrc to ~/.config/zsh/.zshrc,
-# any other zsh config files can also reside here
-export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
-
 # Configure history
+export HISTFILE="${XDG_CACHE_HOME}/zsh_history"
 export HISTSIZE=10000
 export SAVEHIST=10000
-export HISTFILE="${XDG_CACHE_HOME}/zsh_history"
 
 # History files for other packages
 export LESSHISTFILE="${XDG_CACHE_HOME}/less_history"
@@ -43,6 +38,3 @@ export LESSHISTFILE="${XDG_CACHE_HOME}/less_history"
 # Config files for other packages
 export GTK_RC_FILES="${XDG_CONFIG_HOME}/gtk-1.0/gtkrc"
 export GTK2_RC_FILES="${XDG_CONFIG_HOME}/gtk-2.0/gtkrc-2.0"
-
-# Set EDITOR
-export EDITOR="nvim"
