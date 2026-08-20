@@ -13,23 +13,11 @@
 alias q="exit"
 alias c="clear"
 
-# Text Editor
-alias e="${EDITOR}"
-
 # Changing Directories
 alias z="cd"
-alias r="cd -"
+alias zz="cd -"
 alias ..="cd .."
 alias ...="cd ../.."
-
-# Modify Existing Commands
-alias mkdir="mkdir -p" # Create parent directories if non-existing
-alias rm="rm -I" # Prompt for confirmation before deleting files
-alias rmr="rm -Ir" # Prompt for confirmation before deleting files recursively
-alias cp="cp -r" # Copy files recursively
-
-# Shorten Long Commands
-alias mkexe="chmod +x" # Makes a file executable
 
 # Listing Directory Contents
 {{- if or (eq .osid "linux-arch") (eq .osid "linux-fedora") -}}
@@ -47,4 +35,15 @@ alias ll="ls -lh --group-directories-first" # long list info
 alias lla="ls -lha --group-directories-first" # list info all
 
 {{- end }}
+
+# Modify Existing Commands
+alias mkdir="mkdir -p" # Create parent directories if non-existing
+alias rm="rm -I" # Prompt for confirmation before deleting files
+alias cp="cp -r" # Copy files recursively
+
+# Shorten Long Commands
+alias mkexe="chmod +x" # Makes a file executable
+
+# Text Editor
+alias e="${EDITOR}"
 
