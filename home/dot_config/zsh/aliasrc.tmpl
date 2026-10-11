@@ -47,3 +47,22 @@ alias mkexe="chmod +x" # Makes a file executable
 # Text Editor
 alias e="${EDITOR}"
 
+# Functions
+############
+#
+# Send ntfy
+send-ntfy() {
+  if (( $# < 2 )); then
+    echo "Usage: ntfy <topic> <message> [-H 'Header: value' ...]" >&2
+    return 1
+  fi
+
+  local topic="$1"
+  local message="$2"
+  shift 2
+
+  curl -fsS \
+    "$@" \
+    -d "${message}" \
+    "https://ntfy.sh/${topic}"
+}

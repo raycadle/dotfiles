@@ -47,6 +47,10 @@ bindkey -v
 # Source fzf-zsh completions
 source <(fzf --zsh)
 
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '^e' edit-command-line
+
 # Environment
 ##############
 #
@@ -92,6 +96,142 @@ elif [[ "${TTY}" =~ /dev/tty* ]]; then
   # Prompt for TTY
   precmd () { print -P "\\n%F{cyan}%~%f" }
   PROMPT="%(?|%F{green}>%f|%F{red}>%f) "
+##############################################
+#
+#    ███████╗███████╗██╗  ██╗██████╗  ██████╗
+#    ╚══███╔╝██╔════╝██║  ██║██╔══██╗██╔════╝
+#      ███╔╝ ███████╗███████║██████╔╝██║     
+#     ███╔╝  ╚════██║██╔══██║██╔══██╗██║     
+# ██╗███████╗███████║██║  ██║██║  ██║╚██████╗
+# ╚═╝╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝
+#
+##############################################
+# Local Variables
+##################
+#
+export ZSH_DIR="${HOME}/.config/zsh"
+export ZSH_THEMES="${ZSH_DIR}/themes"
+export ZSH_PLUGINS="${ZSH_DIR}/plugins"
+
+# Local Functions
+##################
+#
+# Source single file if exists
+source_file() { if [[ -f "${1}" ]]; then source "${1}"; fi }
+
+# Load plugins
+load_plugins() {
+  for plugin in "${plugins[@]}"; do
+    source_file "${ZSH_PLUGINS}/${plugin}/${plugin}.zsh"
+  done
+}
+
+# Shell Options
+################
+#
+# Configure history
+setopt share_history
+setopt hist_ignore_all_dups hist_find_no_dups
+
+# Set umask
+umask 077
+
+# Enable vi-mode
+bindkey -v
+
+# Source fzf-zsh completions
+source <(fzf --zsh)
+
+# Autoload
+###########
+#
+# Edit command in $EDITOR
+autoload -Uz edit-command-line
+zle -N edit-command-line
+
+# Batch renaming and moving
+autoload zmv
+
+# Keybinds
+###########
+#
+# Allows editing text after exiting normal mode in vi-mode
+bindkey "^H" backward-delete-char
+bindkey "^?" backward-delete-char
+
+# Edit command in $EDITOR
+bindkey '^e' edit-command-line
+
+# Enable magic-space
+bindkey ' ' magic-space
+
+# Environment
+##############
+#
+# Source envrc
+source_file "${ZSH_DIR}/envrc"
+
+# Aliases
+##########
+#
+# Unset all other aliases
+unalias -m "*"
+
+# Source custom aliases
+source_file "${ZSH_DIR}/aliasrc"
+
+# Functions
+############
+#
+# List directory contents on enter
+cdls() {
+  if which eza &> /dev/null; then
+    eza -l
+  else
+    ls -l
+  fi
+}
+
+# Run a command on directory change
+# Note: Keep at the bottom of functions
+chpwd() {
+  #cdls
+}
+
+# Plugins
+##########
+#
+# Plugins List
+# Add plugin names to list here.
+# Plugins must be in a directory of the same name.
+# E.g.: ${ZSH_DIR}/plugins/example/example.zsh
+plugins=(
+  "zsh-syntax-highlighting" # Syntax Highlighting
+  "zsh-autosuggestions" # Command Suggestions
+  "zsh-256color" # 256 Terminal Colors
+)
+load_plugins
+
+# Prompt
+#########
+#
+# Enable Powerlevel10k instant prompt
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+if [[ "${TTY}" =~ /dev/pts/* ]]; then
+  # Prompt for GUI Terminals
+  source_file "${ZSH_THEMES}/powerlevel10k/powerlevel10k.zsh-theme"
+  source_file "${ZSH_THEMES}/powerlevel10k/p10k.zsh"
+elif [[ "${TTY}" =~ /dev/tty* ]]; then
+  # Prompt for TTY
+  precmd () { print -P "\\n%F{cyan}%~%f" }
+  PROMPT="%(?|%F{green}>%f|%F{red}>%f) "
+else
+  # Prompt for Other TTY Types
+  PROMPT="> "
+fi
 else
   # Prompt for Other TTY Types
   PROMPT="> "
